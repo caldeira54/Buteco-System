@@ -1,0 +1,10 @@
+{
+  "expo": {
+    "name": "Buteco-System",
+    "slug": "Buteco-System",
+    "version": "1.0.0",
+    "assetBundlePatterns": [
+      "**/*"
+    ]
+  }
+}
