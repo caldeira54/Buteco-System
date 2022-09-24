@@ -50,7 +50,7 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
     },
     button: {
-        backgroundColor: colors("verdeclaro"),
+        backgroundColor: colors("verdeescuro"),
         padding: 10,
         width: '100%',
         borderRadius: 12,
