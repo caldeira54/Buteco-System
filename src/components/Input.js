@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { TextInput, StyleSheet, KeyboardAvoidingView, Platform, View, TouchableOpacity } from 'react-native';
+import { TextInput, StyleSheet, KeyboardAvoidingView, Platform, View, TouchableOpacity, Image } from 'react-native';
 import { User, Eye, EyeSlash, Key } from 'phosphor-react-native';
 
 import colors from '../global/colors';
@@ -15,6 +15,13 @@ export default function Input({ placeholder, security = false, keyboardType, aut
                 )}
                 {icon === 'pass' && (
                     <Key color={colors('branco')} size={20} />
+                )}
+                {icon === 'cnpj' && (
+                    <Image
+                        source={require('../assets/img/iconCnpj.png')}
+                        resizeMode="contain"
+                        style={{ width: '60%', height: '40%' }}
+                    />
                 )}
                 <TextInput
                     placeholder={placeholder}
@@ -48,7 +55,6 @@ const styles = StyleSheet.create({
         padding: 4,
         marginBottom: 20,
         alignItems: 'center'
-
     },
     input: {
         width: '80%',

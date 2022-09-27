@@ -1,44 +1,34 @@
 import React from 'react';
 import { useNavigation } from '@react-navigation/native';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
-import { ArrowLeft, SignOut } from 'phosphor-react-native';
+import { SignOut } from 'phosphor-react-native';
 import colors from '../global/colors';
 
-export default function Header({ title, backButton = true, exitButton = false }) {
+export default function Header({ title }) {
     const navigation = useNavigation();
 
     return (
         <View style={styles.container}>
-            <View style={styles.header}>
-                {backButton ? (
-                    <TouchableOpacity onPress={() => navigation.navigate('signin')}>
-                        <ArrowLeft size={30} color={colors('branco')} />
-                    </TouchableOpacity>
-                ) : <View />}
-                <Text style={styles.title}>{title}</Text>
-                {exitButton ? (
-                    <TouchableOpacity onPress={() => navigation.goBack()}>
-                        <SignOut size={28} color={colors('verdeclaro')} />
-                    </TouchableOpacity>
-                ) : <View />}
-            </View>
+            <Text style={styles.textLabel}>
+                {title}
+            </Text>
         </View>
     );
 }
 
 const styles = StyleSheet.create({
     container: {
+        backgroundColor: colors('cinzaescuro'),
         height: 80,
-        padding: 5,
-    },
-    header: {
-        top: 30,
-        flexDirection: 'row',
+        margin: 20,
+        borderRadius: 12,
         alignItems: 'center',
-        justifyContent: 'space-between',
+        justifyContent: 'center',
+        width: '80%',
     },
-    title: {
-        fontSize: 25,
-        color: colors('branco')
+    textLabel: {
+        color: colors('branco'),
+        textAlign: 'center',
+        fontSize: 20
     }
 })
