@@ -20,7 +20,7 @@ export default function Input({ placeholder, security = false, keyboardType, aut
                     <Image
                         source={require('../assets/img/iconCnpj.png')}
                         resizeMode="contain"
-                        style={{ width: '60%', height: '40%' }}
+                        style={{ width: '80%', height: '60%' }}
                     />
                 )}
                 <TextInput
