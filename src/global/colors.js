@@ -12,6 +12,8 @@ const colors = (color) => {
         return '#131111';
       case 'branco':
         return '#F5F5F5';
+      case 'vermelho':
+        return '#F17070';
       default:
         return color;
     }
