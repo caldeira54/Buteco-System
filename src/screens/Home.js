@@ -1,10 +1,17 @@
 import React from 'react';
 import { View, StyleSheet, Image, Text, TouchableOpacity } from 'react-native';
 import colors from '../global/colors';
+import { useNavigation } from '@react-navigation/native';
 
 import Header from '../components/Header';
 
 export default function Home() {
+    const navigation = useNavigation();
+
+    function handleProvider() {
+        navigation.navigate("provider");
+    }
+
     return (
         <View style={styles.container}>
             <Image
@@ -25,7 +32,7 @@ export default function Home() {
                 </View>
             </View>
             <View style={styles.tab}>
-                <TouchableOpacity>
+                <TouchableOpacity onPress={handleProvider}>
                     <Image
                         source={require('../assets/img/List.png')}
                         resizeMode="contain"
