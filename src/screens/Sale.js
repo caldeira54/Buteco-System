@@ -4,6 +4,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import colors from '../global/colors';
 import Header from '../components/Header.js';
 import InputCadastro from '../components/InputCadastro.js';
+import Footer from '../components/Footer.js';
 
 export default function Sale() {
     return (
@@ -22,6 +23,7 @@ export default function Sale() {
                     <InputCadastro placeholder="Data" icon='data' />
                 </View>
             </View>
+            <Footer/>
         </SafeAreaView>
 
     );

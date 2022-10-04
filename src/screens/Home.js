@@ -7,9 +7,13 @@ import Header from '../components/Header';
 
 export default function Home() {
     const navigation = useNavigation();
-
+    
     function handleProvider() {
         navigation.navigate("provider");
+    }
+
+    function handleSale() {
+        navigation.navigate("sale");
     }
 
     return (
@@ -39,7 +43,7 @@ export default function Home() {
                         style={{ width: 50, height: 50 }}
                     />
                 </TouchableOpacity>
-                <TouchableOpacity>
+                <TouchableOpacity onPress={handleSale}>
                     <Image
                         source={require('../assets/img/Wallet.png')}
                         resizeMode="contain"

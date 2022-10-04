@@ -19,19 +19,40 @@ export default function Input({ placeholder, icon = null }) {
                     <Image
                         source={require('../assets/img/iconNome.png')}
                         resizeMode="contain"
-                        style={{ width: '10%', height: '60%' }}
+                        style={{ width: '10%', height: '50%' }}
                     />
                 )}
                 {icon === 'endereco' && (
                     <Image
                         source={require('../assets/img/iconLocal.png')}
                         resizeMode="contain"
-                        style={{ width: '10%', height: '60%' }}
+                        style={{ width: '10%', height: '50%' }}
+                    />
+                )}
+                {icon === 'funcionario' && (
+                    <Image
+                        source={require('../assets/img/iconFuncionario.png')}
+                        resizeMode="contain"
+                        style={{ width: '10%', height: '50%' }}
+                    />
+                )}
+                {icon === 'valor' && (
+                    <Image
+                        source={require('../assets/img/iconValor.png')}
+                        resizeMode="contain"
+                        style={{ width: '10%', height: '50%' }}
+                    />
+                )}
+                {icon === 'data' && (
+                    <Image
+                        source={require('../assets/img/iconData.png')}
+                        resizeMode="contain"
+                        style={{ width: '10%', height: '50%' }}
                     />
                 )}
                 <TextInput
                     placeholder={placeholder}
-                    placeholderTextColor={colors("branco")}
+                    placeholderTextColor={colors("cinzaclaro")}
                     style={styles.input}
                 />
             </View>
