@@ -4,7 +4,8 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import colors from '../global/colors';
 import Header from '../components/Header.js';
 import InputCadastro from '../components/InputCadastro.js';
-// import Footer from '../components/Footer.js';
+import Footer from '../components/Footer';
+import BtnCadastrar from '../components/BtnCadastrar.js';
 
 export default function Provider() {
     return (
@@ -22,11 +23,9 @@ export default function Provider() {
                 <View>
                     <InputCadastro placeholder="ENDEREÇO" icon='endereco' />
                 </View>
-
-                <TouchableOpacity style={styles.button}>
-                    <Text style={styles.textButton}>Cadastrar</Text>
-                </TouchableOpacity>
             </View>
+            <BtnCadastrar/>
+            <Footer/>
         </SafeAreaView>
 
     );

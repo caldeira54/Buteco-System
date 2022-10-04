@@ -16,6 +16,10 @@ export default function Home() {
         navigation.navigate("sale");
     }
 
+    function handleSignIn() {
+        navigation.navigate("signIn");
+    }
+
     return (
         <View style={styles.container}>
             <Image
@@ -50,7 +54,7 @@ export default function Home() {
                         style={{ width: 50, height: 50 }}
                     />
                 </TouchableOpacity>
-                <TouchableOpacity>
+                <TouchableOpacity onPress={handleSignIn}>
                     <Image
                         source={require('../assets/img/SignOut.png')}
                         resizeMode="contain"

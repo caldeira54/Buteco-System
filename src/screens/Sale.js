@@ -5,6 +5,7 @@ import colors from '../global/colors';
 import Header from '../components/Header.js';
 import InputCadastro from '../components/InputCadastro.js';
 import Footer from '../components/Footer.js';
+import BtnCadastrar from '../components/BtnCadastrar.js';
 
 export default function Sale() {
     return (
@@ -23,6 +24,7 @@ export default function Sale() {
                     <InputCadastro placeholder="Data" icon='data' />
                 </View>
             </View>
+            <BtnCadastrar/>
             <Footer/>
         </SafeAreaView>
 
