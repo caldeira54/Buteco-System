@@ -2,12 +2,11 @@ import React from 'react';
 import { View, StyleSheet, Image, Text, TouchableOpacity } from 'react-native';
 import colors from '../global/colors';
 import { useNavigation } from '@react-navigation/native';
-
-import Header from '../components/Header';
+import Exit from '../components/Exit';
 
 export default function Home() {
     const navigation = useNavigation();
-    
+
     function handleProvider() {
         navigation.navigate("provider");
     }
@@ -16,12 +15,13 @@ export default function Home() {
         navigation.navigate("sale");
     }
 
-    function handleSignIn() {
-        navigation.navigate("signIn");
+    function handleLists() {
+        navigation.navigate("lists");
     }
 
     return (
         <View style={styles.container}>
+            <Exit/>
             <Image
                 source={require('../assets/img/sinuca.png')}
                 resizeMode="contain"
@@ -54,9 +54,9 @@ export default function Home() {
                         style={{ width: 50, height: 50 }}
                     />
                 </TouchableOpacity>
-                <TouchableOpacity onPress={handleSignIn}>
+                <TouchableOpacity onPress={handleLists}>
                     <Image
-                        source={require('../assets/img/SignOut.png')}
+                        source={require('../assets/img/List.png')}
                         resizeMode="contain"
                         style={{ width: 50, height: 50 }}
                     />
@@ -81,7 +81,6 @@ const styles = StyleSheet.create({
         bottom: 0,
         position: 'absolute',
         padding: 20,
-
     },
     box: {
         flexDirection: 'column',
