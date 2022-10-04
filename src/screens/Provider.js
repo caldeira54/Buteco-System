@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, StyleSheet } from 'react-native';
+import { View, StyleSheet, Text, TouchableOpacity } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import colors from '../global/colors';
 import Header from '../components/Header.js';
@@ -21,6 +21,10 @@ export default function Provider() {
                 <View>
                     <InputCadastro placeholder="ENDEREÇO" icon='endereco' />
                 </View>
+
+                <TouchableOpacity>
+                    <Text style={styles.button}>Cadastrar</Text>
+                </TouchableOpacity>
             </View>
         </SafeAreaView>
 
@@ -38,6 +42,8 @@ const styles = StyleSheet.create({
         width: "75%",
         justifyContent: 'center',
         marginTop: 50,
-    }
+    },
+    button: {
 
+    }
 });

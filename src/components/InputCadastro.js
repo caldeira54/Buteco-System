@@ -12,21 +12,21 @@ export default function Input({ placeholder, icon = null }) {
                     <Image
                         source={require('../assets/img/iconCnpj.png')}
                         resizeMode="contain"
-                        style={{ width: '80%', height: '60%' }}
+                        style={{ width: '10%', height: '50%' }}
                     />
                 )}
                 {icon === 'nome' && (
                     <Image
                         source={require('../assets/img/iconNome.png')}
                         resizeMode="contain"
-                        style={{ width: '80%', height: '60%' }}
+                        style={{ width: '10%', height: '60%' }}
                     />
                 )}
                 {icon === 'endereco' && (
                     <Image
                         source={require('../assets/img/iconLocal.png')}
                         resizeMode="contain"
-                        style={{ width: '80%', height: '60%' }}
+                        style={{ width: '10%', height: '60%' }}
                     />
                 )}
                 <TextInput
