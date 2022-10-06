@@ -1,11 +1,8 @@
 import React from 'react';
-import { useNavigation } from '@react-navigation/native';
-import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
-import { SignOut } from 'phosphor-react-native';
+import { View, Text, StyleSheet} from 'react-native';
 import colors from '../global/colors';
 
 export default function Header({ title }) {
-    const navigation = useNavigation();
 
     return (
         <View style={styles.container}>
@@ -18,6 +15,7 @@ export default function Header({ title }) {
 
 const styles = StyleSheet.create({
     container: {
+        marginTop: 30,
         backgroundColor: colors('cinzaescuro'),
         height: 80,
         margin: 20,

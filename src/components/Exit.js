@@ -3,19 +3,20 @@ import { useNavigation } from '@react-navigation/native';
 import { View, Text, StyleSheet, TouchableOpacity, Image } from 'react-native';
 import colors from '../global/colors';
 
-export default function Exit({ title }) {
+export default function Exit() {
     const navigation = useNavigation();
+
+    function handleSignOut() {
+        navigation.navigate("signIn");
+    }
 
     return (
         <View style={styles.container}>
-            <Text style={styles.textLabel}>
-                {title}
-            </Text>
-            <TouchableOpacity>  
+            <TouchableOpacity onPress={handleSignOut}>  
             <Image
                 source={require('../assets/img/SignOut.png')}
                 resizeMode="contain"
-                style={{ width: 50, height: 50, justifyContent: 'flex-end' }}
+                style={styles.icon}
             />
             </TouchableOpacity>
         </View>
@@ -31,9 +32,10 @@ const styles = StyleSheet.create({
         justifyContent: 'flex-end',
         width: '100%',
     },
-    textLabel: {
-        color: colors('branco'),
-        textAlign: 'center',
-        fontSize: 20
+    icon: {
+        width: 50,
+        height: 50,
+        justifyContent: 'flex-end',
+        tintColor: colors('cinzaescuro')
     }
 })
