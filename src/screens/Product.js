@@ -7,7 +7,7 @@ import InputCadastro from '../components/InputCadastro.js';
 import Footer from '../components/Footer';
 import BtnCadastrar from '../components/BtnCadastrar.js';
 
-export default function Provider() {
+export default function Product() {
     return (
         <SafeAreaView style={styles.container}>
             <Header style={styles.container} title='CADASTRO DE PRODUTOS' />
