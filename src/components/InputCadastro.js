@@ -50,6 +50,20 @@ export default function Input({ placeholder, icon = null }) {
                         style={{ width: '10%', height: '50%' }}
                     />
                 )}
+                {icon === 'produto' && (
+                    <Image
+                        source={require('../assets/img/iconProduto.png')}
+                        resizeMode="contain"
+                        style={{ width: '10%', height: '50%' }}
+                    />
+                )}
+                {icon === 'quantidade' && (
+                    <Image
+                        source={require('../assets/img/iconQuantidade.png')}
+                        resizeMode="contain"
+                        style={{ width: '10%', height: '50%' }}
+                    />
+                )}
                 <TextInput
                     placeholder={placeholder}
                     placeholderTextColor={colors("cinzaclaro")}
