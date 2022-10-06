@@ -22,6 +22,7 @@ export default function Home() {
     return (
         <View style={styles.container}>
             <Exit/>
+            <Text style={styles.name}>Nome indisponível</Text>
             <Image
                 source={require('../assets/img/sinuca.png')}
                 resizeMode="contain"
@@ -96,6 +97,12 @@ const styles = StyleSheet.create({
         fontSize: 17,
         color: colors('branco'),
         textAlign: 'center',
+    },
+    name: {
+        fontSize: 25,
+        color: colors('verdeescuro'),
+        textAlign: 'center',
+        backgroundColor: colors('branco'),
     },
     line: {
         borderColor: colors("branco"),
