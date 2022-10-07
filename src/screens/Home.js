@@ -7,22 +7,22 @@ import Exit from '../components/Exit';
 export default function Home() {
     const navigation = useNavigation();
 
-    function handleProvider() {
-        navigation.navigate("provider");
+    function handleRegister() {
+        navigation.navigate("register");
     }
 
     function handleSale() {
         navigation.navigate("sale");
     }
 
-    function handleLists() {
-        navigation.navigate("lists");
+    function handleReport() {
+        navigation.navigate("report");
     }
 
     return (
         <View style={styles.container}>
             <Exit/>
-            <Text style={styles.name}>Nome indisponível</Text>
+            <Text style={styles.name}>God of Bar</Text>
             <Image
                 source={require('../assets/img/sinuca.png')}
                 resizeMode="contain"
@@ -41,25 +41,25 @@ export default function Home() {
                 </View>
             </View>
             <View style={styles.tab}>
-                <TouchableOpacity onPress={handleProvider}>
+                <TouchableOpacity onPress={handleRegister}>
                     <Image
-                        source={require('../assets/img/List.png')}
+                        source={require('../assets/img/iconCadastrar.png')}
                         resizeMode="contain"
-                        style={{ width: 50, height: 50 }}
+                        style={styles.icon}
                     />
                 </TouchableOpacity>
                 <TouchableOpacity onPress={handleSale}>
                     <Image
                         source={require('../assets/img/Wallet.png')}
                         resizeMode="contain"
-                        style={{ width: 50, height: 50 }}
+                        style={styles.icon}
                     />
                 </TouchableOpacity>
-                <TouchableOpacity onPress={handleLists}>
+                <TouchableOpacity onPress={handleReport}>
                     <Image
-                        source={require('../assets/img/List.png')}
+                        source={require('../assets/img/iconListagem.png')}
                         resizeMode="contain"
-                        style={{ width: 50, height: 50 }}
+                        style={styles.icon}
                     />
                 </TouchableOpacity>
             </View>
@@ -93,6 +93,11 @@ const styles = StyleSheet.create({
         borderRadius: 15,
         paddingVertical: 5,
     },
+    icon: {
+        width: 50,
+        height: 50,
+        tintColor: colors("cinzaclaro"),
+    },
     title: {
         fontSize: 17,
         color: colors('branco'),
@@ -103,6 +108,8 @@ const styles = StyleSheet.create({
         color: colors('verdeescuro'),
         textAlign: 'center',
         backgroundColor: colors('branco'),
+        borderRadius: 10,
+        width: 200,
     },
     line: {
         borderColor: colors("branco"),

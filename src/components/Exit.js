@@ -25,7 +25,7 @@ export default function Exit() {
 
 const styles = StyleSheet.create({
     container: {
-        height: 30,
+        height: 40,
         margin: 20,
         borderRadius: 12,
         alignItems: 'flex-end',

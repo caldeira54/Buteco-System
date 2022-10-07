@@ -6,7 +6,6 @@ export default function Card({ title, type, onPress }) {
     return (
         <TouchableOpacity style={styles.container} onPress={onPress}>
             <View style={styles.cards}>
-                <Text style={styles.title}>{title}</Text>
                 {type === 'provider' && (
                     <Image style={styles.icon}
                         source={require('../assets/img/iconCnpj.png')}
@@ -19,6 +18,25 @@ export default function Card({ title, type, onPress }) {
                         resizeMode="contain"
                     />
                 )}
+                {type === 'product' && (
+                    <Image style={styles.icon}
+                        source={require('../assets/img/iconProduto.png')}
+                        resizeMode="contain"
+                    />
+                )}
+                {type === 'inventory' && (
+                    <Image style={styles.icon}
+                        source={require('../assets/img/iconEstoque.png')}
+                        resizeMode="contain"
+                    />
+                )}
+                {type === 'note' && (
+                    <Image style={styles.icon}
+                        source={require('../assets/img/iconNota.png')}
+                        resizeMode="contain"
+                    />
+                )}
+                <Text style={styles.title}>{title}</Text>
             </View>
         </TouchableOpacity>
     );
@@ -34,7 +52,6 @@ const styles = StyleSheet.create({
         height: 80,
         width: 250,
         paddingHorizontal: 10,
-        justifyContent: 'space-evenly',
         alignItems: 'center',
         flexDirection: 'row',
         backgroundColor: colors('branco'),
@@ -43,10 +60,13 @@ const styles = StyleSheet.create({
     },
     title: {
         fontSize: 20,
+        textAlign: 'center',
     },
     icon: {
-        width: 20,
-        height: 20,
+        width: 30,
+        height: 30,
         tintColor: colors('cinzaescuro'),
+        marginLeft: 10,
+        marginRight: 30,
     }
 })

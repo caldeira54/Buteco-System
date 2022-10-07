@@ -12,56 +12,56 @@ export default function Input({ placeholder, icon = null }) {
                     <Image
                         source={require('../assets/img/iconCnpj.png')}
                         resizeMode="contain"
-                        style={{ width: '10%', height: '50%' }}
+                        style={styles.icon}
                     />
                 )}
                 {icon === 'nome' && (
                     <Image
                         source={require('../assets/img/iconNome.png')}
                         resizeMode="contain"
-                        style={{ width: '10%', height: '50%' }}
+                        style={styles.icon}
                     />
                 )}
                 {icon === 'endereco' && (
                     <Image
                         source={require('../assets/img/iconLocal.png')}
                         resizeMode="contain"
-                        style={{ width: '10%', height: '50%' }}
+                        style={styles.icon}
                     />
                 )}
                 {icon === 'funcionario' && (
                     <Image
                         source={require('../assets/img/iconFuncionario.png')}
                         resizeMode="contain"
-                        style={{ width: '10%', height: '50%' }}
+                        style={styles.icon}
                     />
                 )}
                 {icon === 'valor' && (
                     <Image
                         source={require('../assets/img/iconValor.png')}
                         resizeMode="contain"
-                        style={{ width: '10%', height: '50%' }}
+                        style={styles.icon}
                     />
                 )}
                 {icon === 'data' && (
                     <Image
                         source={require('../assets/img/iconData.png')}
                         resizeMode="contain"
-                        style={{ width: '10%', height: '50%' }}
+                        style={styles.icon}
                     />
                 )}
                 {icon === 'produto' && (
                     <Image
                         source={require('../assets/img/iconProduto.png')}
                         resizeMode="contain"
-                        style={{ width: '10%', height: '50%' }}
+                        style={styles.icon}
                     />
                 )}
                 {icon === 'quantidade' && (
                     <Image
                         source={require('../assets/img/iconQuantidade.png')}
                         resizeMode="contain"
-                        style={{ width: '10%', height: '50%' }}
+                        style={styles.icon}
                     />
                 )}
                 <TextInput
@@ -90,5 +90,10 @@ const styles = StyleSheet.create({
         width: '80%',
         fontSize: 17,
         color: colors("branco"),
+    },
+    icon: {
+        width: '10%',
+        height: '50%',
+        tintColor: colors("cinzaclaro"),
     },
 });
