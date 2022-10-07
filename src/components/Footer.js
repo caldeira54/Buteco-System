@@ -17,7 +17,7 @@ export default function Footer() {
                 <Image
                     source={require('../assets/img/iconHome.png')}
                     resizeMode="contain"
-                    style={{ width: 50, height: 50 }}
+                    style={styles.icon}
                 />
             </TouchableOpacity>
         </View>
@@ -34,5 +34,10 @@ const styles = StyleSheet.create({
         bottom: 0,
         position: 'absolute',
         padding: 20,
+    },
+    icon: {
+        width: 50,
+        height: 50,
+        tintColor: colors("cinzaclaro"),
     }
 })

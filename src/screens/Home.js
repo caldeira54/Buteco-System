@@ -50,7 +50,7 @@ export default function Home() {
                 </TouchableOpacity>
                 <TouchableOpacity onPress={handleSale}>
                     <Image
-                        source={require('../assets/img/Wallet.png')}
+                        source={require('../assets/img/iconCarteira.png')}
                         resizeMode="contain"
                         style={styles.icon}
                     />

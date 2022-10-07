@@ -36,6 +36,6 @@ const styles = StyleSheet.create({
         width: 50,
         height: 50,
         justifyContent: 'flex-end',
-        tintColor: colors('cinzaescuro')
+        tintColor: colors('cinzaclaro')
     }
 })
