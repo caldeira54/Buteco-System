@@ -18,12 +18,28 @@ export default function ReportLists() {
         navigation.navigate("sales");
     }
 
+    const handlePressProducts = () => {
+        navigation.navigate("products");
+    }
+
+    const handlePressBuys = () => {
+        navigation.navigate("buys");
+    }
+
+    const handlePressNotes = () => {
+        navigation.navigate("notes");
+    }
+
+
     return (
         <View style={styles.container}>
             <Header title="RELATÓRIOS" backButton={false} />
             <View style={styles.list}>
                 <Card title="Fornecedores" type="provider" onPress={handlePressProviders} />
+                <Card title="Produtos" type="product" onPress={handlePressProducts} />
                 <Card title="Vendas" type="sale" onPress={handlePressSales} />
+                <Card title="Compras" type="buy" onPress={handlePressBuys} />
+                <Card title="Notas" type="note" onPress={handlePressNotes} />
             </View>
             <Footer />
         </View>

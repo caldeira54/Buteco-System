@@ -26,6 +26,10 @@ export default function RegisterLists() {
         navigation.navigate("note");
     }
 
+    const handleBuy= () => {
+        navigation.navigate("buy");
+    }
+
     return (
         <View style={styles.container}>
             <Header title="CADASTRO" backButton={false} />
@@ -33,6 +37,7 @@ export default function RegisterLists() {
                 <Card title="Fornecedores" type="provider" onPress={handleProvider} />
                 <Card title="Produtos" type="product" onPress={handleProduct} />
                 <Card title="Estoque" type="inventory" onPress={handleInventory} />
+                <Card title="Compras" type="buy" onPress={handleBuy} />
                 <Card title="Notas" type="note" onPress={handleNotes} />
             </View>
             <Footer />

@@ -36,6 +36,12 @@ export default function Card({ title, type, onPress }) {
                         resizeMode="contain"
                     />
                 )}
+                {type === 'buy' && (
+                    <Image style={styles.icon}
+                        source={require('../assets/img/iconCompra.png')}
+                        resizeMode="contain"
+                    />
+                )}
                 <Text style={styles.title}>{title}</Text>
             </View>
         </TouchableOpacity>

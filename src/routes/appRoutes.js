@@ -6,10 +6,14 @@ import Sale from '../screens/Sale';
 import Inventory from '../screens/Inventory';
 import Product from '../screens/Product';
 import PromissoryNotes from '../screens/PromissoryNotes';
+import Buy from '../screens/Buy';
 import ListProviders from '../screens/ListProviders';
 import ListSales from '../screens/ListSales';
 import ReportLists from '../screens/ReportList';
 import RegisterLists from '../screens/RegisterLists';
+import ListBuys from '../screens/ListBuys';
+import ListProducts from '../screens/ListProducts';
+import ListNotes from '../screens/ListNotes';
 
 const {Navigator, Screen} = createNativeStackNavigator();
 
@@ -25,6 +29,7 @@ export default function AppRoutes(){
             <Screen name='inventory' component={Inventory} />
             <Screen name='product' component={Product} />
             <Screen name='note' component={PromissoryNotes} />
+            <Screen name='buy' component={Buy} />
 
             {/* Telas de listagem */}
             <Screen name='report' component={ReportLists} />
@@ -33,6 +38,9 @@ export default function AppRoutes(){
             {/* Telas de relatórios */}
             <Screen name='providers' component={ListProviders} />
             <Screen name='sales' component={ListSales} />
+            <Screen name='products' component={ListProducts} />
+            <Screen name='notes' component={ListNotes} />
+            <Screen name='buys' component={ListBuys} />
         </Navigator>
     )
 }

@@ -3,7 +3,7 @@ import { View, StyleSheet, SafeAreaView } from 'react-native';
 import colors from '../global/colors';
 import Footer from '../components/Footer';
 
-export default function ListProviders() {
+export default function ListProducts() {
     return (
         <SafeAreaView style={styles.container}>
             <View style={styles.container}>
