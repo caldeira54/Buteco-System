@@ -13,15 +13,15 @@ export default function Provider() {
             <Header style={styles.container} title='CADASTRO DE FORNECEDORES' />
             <View style={styles.form}>
                 <View>
-                    <InputCadastro placeholder="CNPJ" icon='cnpj' />
+                    <InputCadastro placeholder="Cnpj" icon='cnpj' />
                 </View>
 
                 <View>
-                    <InputCadastro placeholder="NOME" icon='nome' />
+                    <InputCadastro placeholder="Nome" icon='nome' />
                 </View>
 
                 <View>
-                    <InputCadastro placeholder="ENDEREÇO" icon='endereco' />
+                    <InputCadastro placeholder="Endereço" icon='endereco' />
                 </View>
             </View>
             <BtnCadastrar/>
