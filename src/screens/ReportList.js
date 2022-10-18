@@ -1,5 +1,5 @@
-import React from 'react';
-import { View, StyleSheet} from 'react-native';
+import React, { useState } from 'react';
+import { View, StyleSheet, SafeAreaView, FlatList } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import colors from '../global/colors';
 import Card from '../components/Card';
@@ -7,7 +7,7 @@ import Header from '../components/Header';
 import Footer from '../components/Footer';
 
 export default function ReportLists() {
-
+    const [selectedId, setSelectedId] = useState(null);
     const navigation = useNavigation();
 
     const handlePressProviders = () => {
@@ -30,30 +30,80 @@ export default function ReportLists() {
         navigation.navigate("notes");
     }
 
+    const DATA = [
+        {
+            id: "1",
+            title: "Fornecedores",
+            type: "provider",
+            onPress: handlePressProviders
+        },
+        {
+            id: "2",
+            title: "Produtos",
+            type: "product",
+            onPress: handlePressProducts
+        },
+        {
+            id: "3",
+            title: "Vendas",
+            type: "sale",
+            onPress: handlePressSales
+        },
+        {
+            id: "4",
+            title: "Compras",
+            type: "buy",
+            onPress: handlePressBuys
+        },
+        {
+            id: "5",
+            title: "Notas",
+            type: "note",
+            onPress: handlePressNotes
+        },
+    ];
+
+    const Item = ({ item }) => (
+        <Card title={item.title} type={item.type} onPress={item.onPress} />
+    );
+
+    const renderItem = ({ item }) => {
+
+        return (
+            <Item
+                item={item}
+                onPress={() => setSelectedId(item.id)}
+            />
+        );
+    };
 
     return (
-        <View style={styles.container}>
-            <Header title="RELATÓRIOS" backButton={false} />
-            <View style={styles.list}>
-                <Card title="Fornecedores" type="provider" onPress={handlePressProviders} />
-                <Card title="Produtos" type="product" onPress={handlePressProducts} />
-                <Card title="Vendas" type="sale" onPress={handlePressSales} />
-                <Card title="Compras" type="buy" onPress={handlePressBuys} />
-                <Card title="Notas" type="note" onPress={handlePressNotes} />
-            </View>
+        <>
+            <SafeAreaView style={styles.container}>
+                <Header title="RELATÓRIOS" />
+                <SafeAreaView style={styles.list}>
+                    <FlatList
+                        data={DATA}
+                        renderItem={renderItem}
+                        keyExtractor={(item) => item.id}
+                        extraData={selectedId}
+                    />
+                </SafeAreaView>
+            </SafeAreaView>
             <Footer />
-        </View>
+        </>
     );
 }
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1,
+        height: '88%',
         backgroundColor: colors("verdeclaro"),
-        alignItems: 'center'
+        alignItems: 'center',
     },
     list: {
         flex: 1,
         alignItems: 'center',
+        marginTop: 30
     }
 })

@@ -1,5 +1,5 @@
-import React from 'react';
-import { View, StyleSheet} from 'react-native';
+import React, { useState } from 'react';
+import { View, StyleSheet, SafeAreaView, FlatList} from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import colors from '../global/colors';
 import Card from '../components/Card';
@@ -7,7 +7,7 @@ import Header from '../components/Header';
 import Footer from '../components/Footer';
 
 export default function RegisterLists() {
-
+    const [selectedId, setSelectedId] = useState(null);
     const navigation = useNavigation();
 
     const handleProvider = () => {
@@ -30,29 +30,81 @@ export default function RegisterLists() {
         navigation.navigate("buy");
     }
 
-    return (
-        <View style={styles.container}>
-            <Header title="CADASTRO" backButton={false} />
-            <View style={styles.list}>
-                <Card title="Fornecedores" type="provider" onPress={handleProvider} />
-                <Card title="Produtos" type="product" onPress={handleProduct} />
-                <Card title="Estoque" type="inventory" onPress={handleInventory} />
-                <Card title="Compras" type="buy" onPress={handleBuy} />
-                <Card title="Notas" type="note" onPress={handleNotes} />
-            </View>
-            <Footer />
-        </View>
+    const DATA = [
+        {
+            id: "1",
+            title: "Fornecedores",
+            type: "provider",
+            onPress: handleProvider
+        },
+        {
+            id: "2",
+            title: "Estoque",
+            type: "inventory",
+            onPress: handleInventory
+        },
+        {
+            id: "3",
+            title: "Produtos",
+            type: "product",
+            onPress: handleProduct
+        },
+        {
+            id: "4",
+            title: "Compras",
+            type: "buy",
+            onPress: handleBuy
+        },
+        {
+            id: "5",
+            title: "Notas",
+            type: "note",
+            onPress: handleNotes
+        },
+    ];
+
+    const Item = ({ item }) => (
+        <Card title={item.title} type={item.type} onPress={item.onPress} />
     );
+
+    const renderItem = ({ item }) => {
+
+        return (
+            <Item
+                item={item}
+                onPress={() => setSelectedId(item.id)}
+            />
+        );
+    };
+
+    return (
+        <>
+            <SafeAreaView style={styles.container}>
+                <Header title="CADASTRO" />
+                <SafeAreaView style={styles.list}>
+                    <FlatList
+                        data={DATA}
+                        renderItem={renderItem}
+                        keyExtractor={(item) => item.id}
+                        extraData={selectedId}
+                    />
+                </SafeAreaView>
+            </SafeAreaView>
+            <Footer />
+        </>
+    );
+
 }
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1,
+        height: '88%',
         backgroundColor: colors("verdeclaro"),
-        alignItems: 'center'
+        alignItems: 'center',
     },
     list: {
         flex: 1,
         alignItems: 'center',
+        marginTop: 30
     }
 })
