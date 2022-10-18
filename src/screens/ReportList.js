@@ -80,7 +80,7 @@ export default function ReportLists() {
     return (
         <>
             <SafeAreaView style={styles.container}>
-                <Header title="RELATÓRIOS" backButton={false} />
+                <Header title="RELATÓRIOS" />
                 <SafeAreaView style={styles.list}>
                     <FlatList
                         data={DATA}

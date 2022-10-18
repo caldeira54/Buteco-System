@@ -80,7 +80,7 @@ export default function RegisterLists() {
     return (
         <>
             <SafeAreaView style={styles.container}>
-                <Header title="CADASTRO" backButton={false} />
+                <Header title="CADASTRO" />
                 <SafeAreaView style={styles.list}>
                     <FlatList
                         data={DATA}
