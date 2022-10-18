@@ -46,7 +46,7 @@ export default function ReportLists() {
         {
             id: "3",
             title: "Vendas",
-            type: "inventory",
+            type: "sale",
             onPress: handlePressSales
         },
         {
