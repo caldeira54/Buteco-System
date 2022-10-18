@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
-import { TextInput, StyleSheet, KeyboardAvoidingView, Platform, View, TouchableOpacity, Image } from 'react-native';
+import { TextInput, StyleSheet, KeyboardAvoidingView, Platform, View, Image } from 'react-native';
 
 import colors from '../global/colors';
 
-export default function Input({ placeholder, icon = null }) {
+export default function Input({ placeholder, icon = null, onChange }) {
 
     return (
         <KeyboardAvoidingView behavior={Platform.OS === "ios" ? "padding" : "height"}>
@@ -68,6 +68,7 @@ export default function Input({ placeholder, icon = null }) {
                     placeholder={placeholder}
                     placeholderTextColor={colors("cinzaclaro")}
                     style={styles.input}
+                    onChangeText={onChange}
                 />
             </View>
         </KeyboardAvoidingView>

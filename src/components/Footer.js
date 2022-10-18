@@ -11,8 +11,19 @@ export default function Footer() {
         navigation.navigate("home");
     }
 
+    function handleBack() {
+        navigation.goBack();
+    }
+
     return (
         <View style={styles.tab}>
+            <TouchableOpacity onPress={handleBack}>
+            <Image
+                    source={require('../assets/img/iconBack.png')}
+                    resizeMode="contain"
+                    style={styles.icon}
+                />
+            </TouchableOpacity>
             <TouchableOpacity onPress={handleHome}>
                 <Image
                     source={require('../assets/img/iconHome.png')}
@@ -28,12 +39,14 @@ const styles = StyleSheet.create({
     tab: {
         backgroundColor: colors("cinzaescuro"),
         flexDirection: 'row',
-        justifyContent: 'center',
+        justifyContent: 'space-between',
         width: '100%',
         height: '12%',
         bottom: 0,
         position: 'absolute',
-        padding: 20,
+        paddingTop: 20,
+        paddingRight: 170,
+        paddingLeft: 20,
     },
     icon: {
         width: 50,
