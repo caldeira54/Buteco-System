@@ -1,11 +1,94 @@
-import { View, StyleSheet, SafeAreaView, Text } from 'react-native';
+import { View, StyleSheet, SafeAreaView, Text, FlatList } from 'react-native';
+import React, { useState } from 'react';
 import colors from '../global/colors';
 import Footer from '../components/Footer';
 import BtnEditar from '../components/BtnEditar';
 import BtnExcluir from '../components/BtnExcluir';
 import Header from '../components/Header';
+import CardLine from '../components/CardLine';
 
 export default function ListSales() {
+    const [selectedId, setSelectedId] = useState(null);
+
+    const DATA = [
+        {
+            id: "1",
+            item1: "Mateus",
+            item2: "R$ 1200,00",
+            item3: "25/10/2022",
+            item4: null,
+        },
+        {
+            id: "2",
+            item1: "Mateus",
+            item2: "R$ 1200,00",
+            item3: "25/10/2022",
+            item4: null,
+        },
+        {
+            id: "3",
+            item1: "Mateus",
+            item2: "R$ 1200,00",
+            item3: "25/10/2022",
+            item4: null,
+        },
+        {
+            id: "4",
+            item1: "Mateus",
+            item2: "R$ 1200,00",
+            item3: "25/10/2022",
+            item4: null,
+        },
+        {
+            id: "5",
+            item1: "Mateus",
+            item2: "R$ 1200,00",
+            item3: "25/10/2022",
+            item4: null,
+        },
+        {
+            id: "6",
+            item1: "Mateus",
+            item2: "R$ 1200,00",
+            item3: "25/10/2022",
+            item4: null,
+        },
+        {
+            id: "6",
+            item1: "Mateus",
+            item2: "R$ 1200,00",
+            item3: "25/10/2022",
+            item4: null,
+        },
+        {
+            id: "6",
+            item1: "Mateus",
+            item2: "R$ 1200,00",
+            item3: "25/10/2022",
+            item4: null,
+        },
+        {
+            id: "6",
+            item1: "Maaaaaaaaaaaas",
+            item2: "R$ 1200,00",
+            item3: "25/10/2022",
+            item4: null,
+        },
+    ];
+
+    const Item = ({ item }) => (
+        <CardLine item1={item.item1} item2={item.item2} item3={item.item3} item4={item.item4} />
+    );
+
+    const renderItem = ({ item }) => {
+
+        return (
+            <Item
+                item={item}
+                onPress={() => setSelectedId(item.id)}
+            />
+        );
+    };
 
     return (
         <>
@@ -27,17 +110,13 @@ export default function ListSales() {
                     </View>
                     <View style={styles.line} />
                     <View style={styles.inLine}>
-                        <View style={styles.column1}>
-                            <Text>Arthur</Text>
-                        </View>
-
-                        <View style={styles.column2}>
-                            <Text>1200</Text>
-                        </View>
-
-                        <View style={styles.column3}>
-                            <Text>18/10/2022</Text>
-                        </View>
+                        <FlatList
+                            showsVerticalScrollIndicator={false}
+                            data={DATA}
+                            renderItem={renderItem}
+                            keyExtractor={(item) => item.id}
+                            extraData={selectedId}
+                        />
                     </View>
                 </View>
                 <View style={styles.position}>
@@ -73,23 +152,23 @@ const styles = StyleSheet.create({
     },
     inLine: {
         flexDirection: 'row',
-        //justifyContent: 'space-between',
-        padding: 8,
+        width: '100%',
     },
     line: {
+        width: '100%',
         borderBottomWidth: 1,
     },
     column1: {
-        width: '45%',
-        // borderRightWidth: 1,
+        width: '39%',
+        marginLeft: 10,
+        overflow: 'hidden',
+        flexWrap: 'nowrap',
     },
     column2: {
         width: '27.5%',
-        // borderRightWidth: 1,
     },
     column3: {
         width: '27.5%',
-        // borderRightWidth: 1,
         alignItems: 'center',
         justifyContent: 'center',
     }
