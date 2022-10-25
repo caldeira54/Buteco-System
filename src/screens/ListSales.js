@@ -14,62 +14,62 @@ export default function ListSales() {
         {
             id: "1",
             item1: "Mateus",
-            item2: "R$ 1200,00",
+            item2: "R$ 12000,00",
             item3: "25/10/2022",
             item4: null,
         },
         {
             id: "2",
-            item1: "Mateus",
+            item1: "Jose",
             item2: "R$ 1200,00",
             item3: "25/10/2022",
             item4: null,
         },
         {
             id: "3",
-            item1: "Mateus",
+            item1: "Allan",
             item2: "R$ 1200,00",
             item3: "25/10/2022",
             item4: null,
         },
         {
             id: "4",
-            item1: "Mateus",
+            item1: "Maria Jose",
             item2: "R$ 1200,00",
             item3: "25/10/2022",
             item4: null,
         },
         {
             id: "5",
-            item1: "Mateus",
+            item1: "Guilherme",
             item2: "R$ 1200,00",
             item3: "25/10/2022",
             item4: null,
         },
         {
             id: "6",
-            item1: "Mateus",
+            item1: "Jose Maria",
             item2: "R$ 1200,00",
             item3: "25/10/2022",
             item4: null,
         },
         {
-            id: "6",
-            item1: "Mateus",
+            id: "7",
+            item1: "Arthur",
             item2: "R$ 1200,00",
             item3: "25/10/2022",
             item4: null,
         },
         {
-            id: "6",
-            item1: "Mateus",
+            id: "8",
+            item1: "Luan Pinto",
             item2: "R$ 1200,00",
             item3: "25/10/2022",
             item4: null,
         },
         {
-            id: "6",
-            item1: "Maaaaaaaaaaaas",
+            id: "9",
+            item1: "Eduardo",
             item2: "R$ 1200,00",
             item3: "25/10/2022",
             item4: null,
@@ -97,20 +97,20 @@ export default function ListSales() {
                 <View style={styles.table}>
                     <View style={styles.inLine}>
                         <View style={styles.column1}>
-                            <Text>Funcionário</Text>
+                            <Text style={styles.header}>Funcionário</Text>
                         </View>
 
                         <View style={styles.column2}>
-                            <Text>Valor</Text>
+                            <Text style={styles.header}>Valor</Text>
                         </View>
 
                         <View style={styles.column3}>
-                            <Text>Data</Text>
+                            <Text style={styles.header}>Data</Text>
                         </View>
                     </View>
                     <View style={styles.line} />
                     <View style={styles.inLine}>
-                        <FlatList
+                        <FlatList style={styles.list}
                             showsVerticalScrollIndicator={false}
                             data={DATA}
                             renderItem={renderItem}
@@ -146,9 +146,10 @@ const styles = StyleSheet.create({
     },
     table: {
         height: '60%',
-        width: '75%',
+        width: '90%',
         marginTop: 20,
-        backgroundColor: colors("cinzaclaro"),
+        backgroundColor: colors("verdeescuro"),
+        borderRadius: 10,
     },
     inLine: {
         flexDirection: 'row',
@@ -161,8 +162,8 @@ const styles = StyleSheet.create({
     column1: {
         width: '39%',
         marginLeft: 10,
-        overflow: 'hidden',
-        flexWrap: 'nowrap',
+        flexGrow: 1,
+        flex: 1,
     },
     column2: {
         width: '27.5%',
@@ -171,5 +172,13 @@ const styles = StyleSheet.create({
         width: '27.5%',
         alignItems: 'center',
         justifyContent: 'center',
+    },
+    header: {
+        fontSize: 18,
+        fontWeight: 'bold',
+        color: colors("branco"),
+    },
+    list:{
+        height: '75%',
     }
 })

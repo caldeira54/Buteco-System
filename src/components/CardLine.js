@@ -6,11 +6,13 @@ export default function CardLine({ item1, item2, item3, item4 }) {
     return (
         <TouchableOpacity style={styles.container}>
             <View style={styles.cards}>
-                <Text style={styles.item}>{item1}</Text>
-                <Text style={styles.item}>{item2}</Text>
-                <Text style={styles.item}>{item3}</Text>
+                <Text numberOfLines={1} ellipsizeMode='tail' style={styles.item}>{item1}</Text>
+                <Text ellipsizeMode='tail' style={styles.item}>{item2}</Text>
                 {item4 && (
-                    <Text style={styles.item}>{item4}</Text>
+                    <Text ellipsizeMode='tail' style={styles.item}>{item3}</Text>
+                )}
+                {item4 && (
+                    <Text ellipsizeMode='tail' style={styles.item}>{item4}</Text>
                 )}
             </View>
         </TouchableOpacity>
@@ -24,18 +26,22 @@ const styles = StyleSheet.create({
         marginVertical: 8,
     },
     cards: {
-        height: 40,
-        width: '100%',
+        height: 35,
+        width: '95%',
         paddingHorizontal: 10,
         alignItems: 'center',
         flexDirection: 'row',
         backgroundColor: colors('cinzaclaro'),
-        borderRadius: 10,
+        borderRadius: 5,
         textAlign: 'center',
         justifyContent: 'space-between',
     },
     item: {
-        fontSize: 16,
+        width: '33.3%',
+        fontSize: 15,
         textAlign: 'center',
+        overflow: 'hidden',
+        flexShrink: 1,
+        flexWrap: 'nowrap',
     },
 })
