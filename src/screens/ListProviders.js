@@ -39,6 +39,34 @@ export default function ListProviders() {
                             <Text>Itramandiba</Text>
                         </View>
                     </View>
+                    <View style={styles.line} />
+                    <View style={styles.inLine}>
+                        <View style={styles.column1}>
+                            <Text>12.345.678/0001-80</Text>
+                        </View>
+
+                        <View style={styles.column2}>
+                            <Text>Macol</Text>
+                        </View>
+
+                        <View style={styles.column3}>
+                            <Text>Itramandiba</Text>
+                        </View>
+                    </View>
+                    <View style={styles.line} />
+                    <View style={styles.inLine}>
+                        <View style={styles.column1}>
+                            <Text>12.345.678/0001-70</Text>
+                        </View>
+
+                        <View style={styles.column2}>
+                            <Text>Gildane</Text>
+                        </View>
+
+                        <View style={styles.column3}>
+                            <Text>Itramandiba</Text>
+                        </View>
+                    </View>
                 </View>
                 <View style={styles.position}>
                     <BtnEditar />
@@ -67,7 +95,7 @@ const styles = StyleSheet.create({
     },
     table: {
         height: '60%',
-        width: '75%',
+        width: '90%',
         marginTop: 20,
         backgroundColor: colors("cinzaclaro"),
     },
@@ -81,19 +109,18 @@ const styles = StyleSheet.create({
     },
     column1: {
         width: '50%',
-        // borderRightWidth: 1,
         alignItems: 'center',
         justifyContent: 'center',
+        borderRightWidth: 1,
     },
     column2: {
         width: '25%',
-        // borderRightWidth: 1,
         alignItems: 'center',
         justifyContent: 'center',
+        borderRightWidth: 1,
     },
     column3: {
         width: '25%',
-        // borderRightWidth: 1,
         alignItems: 'center',
         justifyContent: 'center',
     }
