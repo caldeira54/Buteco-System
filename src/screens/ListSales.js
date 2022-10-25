@@ -16,7 +16,7 @@ export default function ListSales() {
                         <View style={styles.column1}>
                             <Text>Funcionário</Text>
                         </View>
-                        
+
                         <View style={styles.column2}>
                             <Text>Valor</Text>
                         </View>
@@ -25,12 +25,12 @@ export default function ListSales() {
                             <Text>Data</Text>
                         </View>
                     </View>
-                    <View style={styles.line}/>
+                    <View style={styles.line} />
                     <View style={styles.inLine}>
-                    <View style={styles.column1}>
+                        <View style={styles.column1}>
                             <Text>Arthur</Text>
                         </View>
-                        
+
                         <View style={styles.column2}>
                             <Text>1200</Text>
                         </View>
@@ -73,22 +73,24 @@ const styles = StyleSheet.create({
     },
     inLine: {
         flexDirection: 'row',
-        // justifyContent: 'space-between',
-        padding: 8
+        //justifyContent: 'space-between',
+        padding: 8,
     },
     line: {
         borderBottomWidth: 1,
     },
     column1: {
-        width: '50%',
+        width: '45%',
         // borderRightWidth: 1,
     },
     column2: {
-        width: '25%',
+        width: '27.5%',
         // borderRightWidth: 1,
     },
     column3: {
-        width: '25%',
+        width: '27.5%',
         // borderRightWidth: 1,
+        alignItems: 'center',
+        justifyContent: 'center',
     }
 })
