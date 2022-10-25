@@ -22,9 +22,8 @@ export default function Home() {
     return (
         <View style={styles.container}>
             <Exit />
-            <Text style={styles.name}>God of Bar</Text>
             <Image
-                source={require('../assets/img/sinuca.png')}
+                source={require('../assets/img/fundomain.png')}
                 resizeMode="contain"
                 style={{ width: '70%', height: '40%' }}
             />
