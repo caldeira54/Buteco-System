@@ -1,12 +1,95 @@
-import React from 'react';
-import { View, StyleSheet, SafeAreaView, Text } from 'react-native';
+import { View, StyleSheet, SafeAreaView, Text, FlatList } from 'react-native';
+import React, { useState } from 'react';
 import colors from '../global/colors';
 import Footer from '../components/Footer';
 import BtnEditar from '../components/BtnEditar';
 import BtnExcluir from '../components/BtnExcluir';
 import Header from '../components/Header';
+import CardLine from '../components/CardLine';
 
-export default function ListProviders() {
+export default function ListProducts() {
+    const [selectedId, setSelectedId] = useState(null);
+
+    const DATA = [
+        {
+            id: "1",
+            item1: "33.041.260/0652-90",
+            item2: "Guarani",
+            item3: "São João Evangelista",
+            item4: null,
+        },
+        {
+            id: "2",
+            item1: "33.041.260/0652-90",
+            item2: "Guarani",
+            item3: "São João Evangelista",
+            item4: null,
+        },
+        {
+            id: "3",
+            item1: "33.041.260/0652-90",
+            item2: "Guarani",
+            item3: "São João Evangelista",
+            item4: null,
+        },
+        {
+            id: "4",
+            item1: "33.041.260/0652-90",
+            item2: "Guarani",
+            item3: "São João Evangelista",
+            item4: null,
+        },
+        {
+            id: "5",
+            item1: "33.041.260/0652-90",
+            item2: "Guarani",
+            item3: "São João Evangelista",
+            item4: null,
+        },
+        {
+            id: "6",
+            item1: "33.041.260/0652-90",
+            item2: "Guarani",
+            item3: "São João Evangelista",
+            item4: null,
+        },
+        {
+            id: "7",
+            item1: "33.041.260/0652-90",
+            item2: "Guarani",
+            item3: "São João Evangelista",
+            item4: null,
+        },
+        {
+            id: "8",
+            item1: "33.041.260/0652-90",
+            item2: "Guarani",
+            item3: "São João Evangelista",
+            item4: null,
+        },
+        {
+            id: "9",
+            item1: "33.041.260/0652-90",
+            item2: "Guarani",
+            item3: "São João Evangelista",
+            item4: null,
+        },
+    ];
+
+    const Item = ({ item }) => (
+        <CardLine item1={item.item1} item2={item.item2} item3={item.item3} item4={item.item4} />
+    );
+
+    const renderItem = ({ item }) => {
+
+        return (
+            <Item
+                item={item}
+                onPress={() => setSelectedId(item.id)}
+            />
+        );
+    };
+
     return (
         <>
             <SafeAreaView style={styles.container}>
@@ -14,58 +97,26 @@ export default function ListProviders() {
                 <View style={styles.table}>
                     <View style={styles.inLine}>
                         <View style={styles.column1}>
-                            <Text>CNPJ</Text>
+                            <Text style={styles.header}>CNPJ</Text>
                         </View>
 
                         <View style={styles.column2}>
-                            <Text>Nome</Text>
+                            <Text style={styles.header}>Nome</Text>
                         </View>
 
                         <View style={styles.column3}>
-                            <Text>Endereço</Text>
+                            <Text style={styles.header}>Endereço</Text>
                         </View>
                     </View>
                     <View style={styles.line} />
                     <View style={styles.inLine}>
-                        <View style={styles.column1}>
-                            <Text>12.345.678/0001-90</Text>
-                        </View>
-
-                        <View style={styles.column2}>
-                            <Text>Coca</Text>
-                        </View>
-
-                        <View style={styles.column3}>
-                            <Text>Itramandiba</Text>
-                        </View>
-                    </View>
-                    <View style={styles.line} />
-                    <View style={styles.inLine}>
-                        <View style={styles.column1}>
-                            <Text>12.345.678/0001-80</Text>
-                        </View>
-
-                        <View style={styles.column2}>
-                            <Text>Macol</Text>
-                        </View>
-
-                        <View style={styles.column3}>
-                            <Text>Itramandiba</Text>
-                        </View>
-                    </View>
-                    <View style={styles.line} />
-                    <View style={styles.inLine}>
-                        <View style={styles.column1}>
-                            <Text>12.345.678/0001-70</Text>
-                        </View>
-
-                        <View style={styles.column2}>
-                            <Text>Gildane</Text>
-                        </View>
-
-                        <View style={styles.column3}>
-                            <Text>Itramandiba</Text>
-                        </View>
+                        <FlatList style={styles.list}
+                            showsVerticalScrollIndicator={false}
+                            data={DATA}
+                            renderItem={renderItem}
+                            keyExtractor={(item) => item.id}
+                            extraData={selectedId}
+                        />
                     </View>
                 </View>
                 <View style={styles.position}>
@@ -97,31 +148,35 @@ const styles = StyleSheet.create({
         height: '60%',
         width: '90%',
         marginTop: 20,
-        backgroundColor: colors("cinzaclaro"),
+        backgroundColor: colors("verdeescuro"),
+        borderRadius: 10,
     },
     inLine: {
         flexDirection: 'row',
-        //justifyContent: 'space-between',
-        padding: 8,
+        width: '100%',
     },
     line: {
+        width: '100%',
         borderBottomWidth: 1,
     },
     column1: {
-        width: '50%',
-        alignItems: 'center',
-        justifyContent: 'center',
-        borderRightWidth: 1,
+        width: '20%',
+        marginLeft: 30,
     },
     column2: {
-        width: '25%',
-        alignItems: 'center',
-        justifyContent: 'center',
-        borderRightWidth: 1,
+        width: '20%',
+        marginLeft: 50,
     },
     column3: {
-        width: '25%',
-        alignItems: 'center',
-        justifyContent: 'center',
+        width: '50%',
+        marginLeft: 30,
+    },
+    header: {
+        fontSize: 18,
+        fontWeight: 'bold',
+        color: colors("branco"),
+    },
+    list:{
+        height: '75%',
     }
 })

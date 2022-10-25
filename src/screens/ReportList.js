@@ -30,6 +30,10 @@ export default function ReportLists() {
         navigation.navigate("notes");
     }
 
+    const handlePressInventory = () => {
+        navigation.navigate("inventorys");
+    }
+
     const DATA = [
         {
             id: "1",
@@ -61,6 +65,12 @@ export default function ReportLists() {
             type: "note",
             onPress: handlePressNotes
         },
+        {
+            id: "6",
+            title: "Estoque",
+            type: "inventory",
+            onPress: handlePressInventory
+        },
     ];
 
     const Item = ({ item }) => (
@@ -81,14 +91,14 @@ export default function ReportLists() {
         <>
             <SafeAreaView style={styles.container}>
                 <Header title="RELATÓRIOS" />
-                <SafeAreaView style={styles.list}>
+                <View style={styles.list}>
                     <FlatList
                         data={DATA}
                         renderItem={renderItem}
                         keyExtractor={(item) => item.id}
                         extraData={selectedId}
                     />
-                </SafeAreaView>
+                </View>
             </SafeAreaView>
             <Footer />
         </>
@@ -104,6 +114,6 @@ const styles = StyleSheet.create({
     list: {
         flex: 1,
         alignItems: 'center',
-        marginTop: 30
-    }
+        marginTop: 30,
+    },
 })

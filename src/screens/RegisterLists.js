@@ -81,14 +81,14 @@ export default function RegisterLists() {
         <>
             <SafeAreaView style={styles.container}>
                 <Header title="CADASTRO" />
-                <SafeAreaView style={styles.list}>
+                <View style={styles.list}>
                     <FlatList
                         data={DATA}
                         renderItem={renderItem}
                         keyExtractor={(item) => item.id}
                         extraData={selectedId}
                     />
-                </SafeAreaView>
+                </View>
             </SafeAreaView>
             <Footer />
         </>

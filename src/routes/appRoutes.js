@@ -14,6 +14,7 @@ import RegisterLists from '../screens/RegisterLists';
 import ListBuys from '../screens/ListBuys';
 import ListProducts from '../screens/ListProducts';
 import ListNotes from '../screens/ListNotes';
+import ListInventorys from '../screens/ListInventorys';
 
 const {Navigator, Screen} = createNativeStackNavigator();
 
@@ -41,6 +42,7 @@ export default function AppRoutes(){
             <Screen name='products' component={ListProducts} />
             <Screen name='notes' component={ListNotes} />
             <Screen name='buys' component={ListBuys} />
+            <Screen name='inventorys' component={ListInventorys} />
         </Navigator>
     )
 }

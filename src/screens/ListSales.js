@@ -13,7 +13,7 @@ export default function ListSales() {
     const DATA = [
         {
             id: "1",
-            item1: "Mateus",
+            item1: "Mateus Henrique",
             item2: "R$ 12000,00",
             item3: "25/10/2022",
             item4: null,

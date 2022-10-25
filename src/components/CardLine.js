@@ -8,8 +8,8 @@ export default function CardLine({ item1, item2, item3, item4 }) {
             <View style={styles.cards}>
                 <Text numberOfLines={1} ellipsizeMode='tail' style={styles.item}>{item1}</Text>
                 <Text ellipsizeMode='tail' style={styles.item}>{item2}</Text>
-                {item4 && (
-                    <Text ellipsizeMode='tail' style={styles.item}>{item3}</Text>
+                {item3 && (
+                    <Text numberOfLines={1} ellipsizeMode='tail' style={styles.item}>{item3}</Text>
                 )}
                 {item4 && (
                     <Text ellipsizeMode='tail' style={styles.item}>{item4}</Text>
@@ -43,5 +43,6 @@ const styles = StyleSheet.create({
         overflow: 'hidden',
         flexShrink: 1,
         flexWrap: 'nowrap',
+        flexGrow: 1,
     },
 })
