@@ -6,13 +6,17 @@ export default function CardLine({ item1, item2, item3, item4 }) {
     return (
         <TouchableOpacity style={styles.container}>
             <View style={styles.cards}>
-                <Text numberOfLines={1} ellipsizeMode='tail' style={styles.item}>{item1}</Text>
-                <Text ellipsizeMode='tail' style={styles.item}>{item2}</Text>
+                {item1 && (
+                    <Text numberOfLines={1} ellipsizeMode='tail' style={[styles.item, { width: '47.5%' }]}>{item1}</Text>
+                )}
+                {item2 && (
+                    <Text numberOfLines={1} ellipsizeMode='tail' style={[styles.item, { width: '47.5%' }]}>{item2}</Text>
+                )}
                 {item3 && (
-                    <Text numberOfLines={1} ellipsizeMode='tail' style={styles.item}>{item3}</Text>
+                    <Text numberOfLines={1} ellipsizeMode='tail' style={[styles.item, { width: '31.4%' }]}>{item3}</Text>
                 )}
                 {item4 && (
-                    <Text ellipsizeMode='tail' style={styles.item}>{item4}</Text>
+                    <Text numberOfLines={1} ellipsizeMode='tail' style={[styles.item, { width: '23.5%' }]}>{item4}</Text>
                 )}
             </View>
         </TouchableOpacity>
@@ -28,16 +32,13 @@ const styles = StyleSheet.create({
     cards: {
         height: 35,
         width: '95%',
-        paddingHorizontal: 10,
+        //paddingHorizontal: 10,
         alignItems: 'center',
         flexDirection: 'row',
         backgroundColor: colors('cinzaclaro'),
         borderRadius: 5,
-        textAlign: 'center',
-        justifyContent: 'space-between',
     },
     item: {
-        width: '33.3%',
         fontSize: 15,
         textAlign: 'center',
         overflow: 'hidden',

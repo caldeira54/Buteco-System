@@ -15,7 +15,7 @@ export default function ListInventorys() {
             id: "1",
             item1: "Guaraniaaaaaa",
             item2: "Coca-Cola",
-            item3: "R$ 1200,00",
+            item3: "R$ 1200aaaaaa,00",
             item4: "10",
         },
         {
