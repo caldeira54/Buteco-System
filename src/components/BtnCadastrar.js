@@ -16,10 +16,11 @@ export default function Provider() {
 const styles = StyleSheet.create({
     button: {
         backgroundColor: colors("verdeescuro"),
-        padding: 10,
-        width: '100%',
+        width: 200,
+        height: 50,
         borderRadius: 12,
-        top: 15
+        justifyContent: 'center',
+        alignItems: 'center',
     },
     textButton: {
         fontSize: 20,

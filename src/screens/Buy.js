@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { View, StyleSheet, SafeAreaView, ScrollView } from 'react-native';
+import { View, StyleSheet, ScrollView } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 import colors from '../global/colors';
 import Header from '../components/Header.js';
 import InputCadastro from '../components/InputCadastro.js';
@@ -47,19 +48,5 @@ const styles = StyleSheet.create({
         flex: 0.5,
         width: "75%",
         justifyContent: 'center',
-        marginTop: 50,
     },
-    button: {
-        backgroundColor: colors("verdeescuro"),
-        padding: 10,
-        width: '100%',
-        borderRadius: 12,
-        top: 15
-    },
-    textButton: {
-        fontSize: 20,
-        color: colors("branco"),
-        textTransform: 'uppercase',
-        textAlign: 'center'
-    }
 });

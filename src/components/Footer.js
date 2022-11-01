@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, StyleSheet, TouchableOpacity, Image } from 'react-native';
+import { View, StyleSheet, TouchableOpacity, Image, SafeAreaView } from 'react-native';
 import colors from '../global/colors';
 import { useNavigation } from '@react-navigation/native';
 
@@ -16,22 +16,22 @@ export default function Footer() {
     }
 
     return (
-        <View style={styles.tab}>
-            <TouchableOpacity onPress={handleBack}>
-            <Image
-                    source={require('../assets/img/iconBack.png')}
-                    resizeMode="contain"
-                    style={styles.icon}
-                />
-            </TouchableOpacity>
-            <TouchableOpacity onPress={handleHome}>
-                <Image
-                    source={require('../assets/img/iconHome.png')}
-                    resizeMode="contain"
-                    style={styles.icon}
-                />
-            </TouchableOpacity>
-        </View>
+        <SafeAreaView style={styles.tab}>
+                <TouchableOpacity onPress={handleBack}>
+                    <Image
+                        source={require('../assets/img/iconBack.png')}
+                        resizeMode="contain"
+                        style={styles.icon}
+                    />
+                </TouchableOpacity>
+                <TouchableOpacity onPress={handleHome}>
+                    <Image
+                        source={require('../assets/img/iconHome.png')}
+                        resizeMode="contain"
+                        style={styles.icon}
+                    />
+                </TouchableOpacity>
+        </SafeAreaView>
     );
 }
 
@@ -41,10 +41,10 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'space-between',
         width: '100%',
-        height: '12%',
+        height: '8%',
         bottom: 0,
         position: 'absolute',
-        paddingTop: 20,
+        paddingTop: 7,
         paddingRight: 170,
         paddingLeft: 20,
     },
