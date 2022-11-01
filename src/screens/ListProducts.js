@@ -143,7 +143,7 @@ const styles = StyleSheet.create({
     },
     table: {
         height: '60%',
-        width: '80%',
+        width: '95%',
         marginTop: 20,
         backgroundColor: colors("verdeescuro"),
         borderRadius: 10,
