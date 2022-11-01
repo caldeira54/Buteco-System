@@ -149,7 +149,7 @@ const styles = StyleSheet.create({
         marginBottom: 30
     },
     table: {
-        height: '60%',
+        height: '62%',
         width: '90%',
         marginTop: 20,
         backgroundColor: colors("verdeescuro"),
@@ -165,17 +165,18 @@ const styles = StyleSheet.create({
         borderBottomWidth: 1,
     },
     column1: {
-        width: '25%',
+        width: '22%',
         marginLeft: 25,
     },
     column2: {
-        width: '25%',
+        width: '22%',
+        marginLeft: 5
     },
     column3: {
-        width: '25%',
+        width: '22%',
     },
     column4: {
-        width: '25%',
+        width: '22%',
     },
     header: {
         fontSize: 18,

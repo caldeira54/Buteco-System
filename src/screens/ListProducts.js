@@ -157,12 +157,12 @@ const styles = StyleSheet.create({
         borderBottomWidth: 1,
     },
     column1: {
-        width: '50%',
-        marginLeft: 30,
+        width: '48.5%',
+        marginLeft: 50,
     },
     column2: {
-        width: '50%',
-        marginLeft: 40,
+        width: '48.5%',
+        marginLeft: 10,
     },
     header: {
         fontSize: 18,

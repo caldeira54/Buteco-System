@@ -160,16 +160,16 @@ const styles = StyleSheet.create({
         borderBottomWidth: 1,
     },
     column1: {
-        width: '20%',
-        marginLeft: 30,
+        width: '25%',
+        marginLeft: 50,
     },
     column2: {
         width: '20%',
-        marginLeft: 50,
+        marginLeft: 15,
     },
     column3: {
         width: '50%',
-        marginLeft: 30,
+        marginLeft: 15,
     },
     header: {
         fontSize: 18,

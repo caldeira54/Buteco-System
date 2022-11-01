@@ -72,7 +72,7 @@ export default function ListInventorys() {
             item1: "Guarani",
             item2: "Coca-Cola",
             item3: "R$ 1200,00",
-            item4: "10",
+            item4: "12",
         },
     ];
 

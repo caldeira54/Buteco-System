@@ -157,11 +157,11 @@ const styles = StyleSheet.create({
         borderBottomWidth: 1,
     },
     column1: {
-        width: '50%',
+        width: '47%',
         marginLeft: 60,
     },
     column2: {
-        width: '50%',
+        width: '47%',
     },
     header: {
         fontSize: 18,

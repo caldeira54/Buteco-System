@@ -160,18 +160,15 @@ const styles = StyleSheet.create({
         borderBottomWidth: 1,
     },
     column1: {
-        width: '39%',
-        marginLeft: 10,
-        flexGrow: 1,
-        flex: 1,
+        width: '28%',
+        marginLeft: 25,
     },
     column2: {
-        width: '27.5%',
+        width: '28%',
+        marginLeft: 40,
     },
     column3: {
-        width: '27.5%',
-        alignItems: 'center',
-        justifyContent: 'center',
+        width: '32%',
     },
     header: {
         fontSize: 18,
