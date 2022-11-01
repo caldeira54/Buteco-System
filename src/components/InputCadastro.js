@@ -3,7 +3,7 @@ import { TextInput, StyleSheet, KeyboardAvoidingView, Platform, View, Image } fr
 
 import colors from '../global/colors';
 
-export default function Input({ placeholder, icon = null, onChange }) {
+export default function Input({ placeholder, icon = null, onChange, keyboardType, value }) {
 
     return (
         <KeyboardAvoidingView behavior={Platform.OS === "ios" ? "padding" : "height"}>
@@ -66,9 +66,11 @@ export default function Input({ placeholder, icon = null, onChange }) {
                 )}
                 <TextInput
                     placeholder={placeholder}
+                    value={value}
                     placeholderTextColor={colors("cinzaclaro")}
                     style={styles.input}
                     onChangeText={onChange}
+                    keyboardType={keyboardType || 'default'}
                 />
             </View>
         </KeyboardAvoidingView>
