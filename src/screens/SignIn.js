@@ -16,7 +16,7 @@ export default function SignIn() {
             <SafeAreaView style={styles.container}>
                 <StatusBar />
                 <Image
-                    source={require('../assets/img/sinucaLogin.png')}
+                    source={require('../assets/img/fundomain.png')}
                     resizeMode="contain"
                     style={{ width: '60%', height: '40%' }}
                 />

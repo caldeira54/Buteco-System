@@ -7,10 +7,10 @@ import Footer from '../components/Footer.js';
 import BtnCadastrar from '../components/BtnCadastrar.js';
 
 export default function Sale() {
-    const [keyboardVisible, setKeyboardVisible] = useState(false);
     const [funcionario, setFuncionario] = useState('');
     const [valor, setValor] = useState('');
     const [data, setData] = useState('');
+    const [keyboardVisible, setKeyboardVisible] = useState(false);
 
     useEffect(() => {
         const keyboardDidShowListener = Keyboard.addListener(

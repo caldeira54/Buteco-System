@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { View, SafeAreaView, StyleSheet, ScrollView } from 'react-native';
+import React, { useState, useEffect } from 'react';
+import { View, SafeAreaView, StyleSheet, ScrollView, Keyboard } from 'react-native';
 import colors from '../global/colors';
 import Header from '../components/Header.js';
 import InputCadastro from '../components/InputCadastro.js';
@@ -10,6 +10,27 @@ export default function Provider() {
     const [cnpj, setCnpj] = useState('');
     const [nome, setNome] = useState('');
     const [endereco, setEndereco] = useState('');
+    const [keyboardVisible, setKeyboardVisible] = useState(false);
+
+    useEffect(() => {
+        const keyboardDidShowListener = Keyboard.addListener(
+            'keyboardDidShow',
+            () => {
+                setKeyboardVisible(true);
+            }
+        );
+        const keyboardDidHideListener = Keyboard.addListener(
+            'keyboardDidHide',
+            () => {
+                setKeyboardVisible(false);
+            }
+        );
+
+        return () => {
+            keyboardDidHideListener.remove();
+            keyboardDidShowListener.remove();
+        };
+    }, []);
 
     return (
         <>
@@ -18,21 +39,23 @@ export default function Provider() {
                 <ScrollView contentContainerStyle={{ flex: 1, alignItems: 'center' }}>
                     <View style={styles.form}>
                         <View>
-                            <InputCadastro placeholder="Cnpj" icon='cnpj' onChange={setCnpj} />
+                            <InputCadastro placeholder="Cnpj" icon='cnpj' value={cnpj} onChange={setCnpj} />
                         </View>
 
                         <View>
-                            <InputCadastro placeholder="Nome" icon='nome' onChange={setNome} />
+                            <InputCadastro placeholder="Nome" icon='nome' value={nome} onChange={setNome} />
                         </View>
 
                         <View>
-                            <InputCadastro placeholder="Endereço" icon='endereco' onChange={setEndereco} />
+                            <InputCadastro placeholder="Endereço" icon='endereco' value={endereco} onChange={setEndereco} />
                         </View>
                     </View>
                     <BtnCadastrar />
                 </ScrollView>
+                {!keyboardVisible && (
+                    <Footer />
+                )}
             </SafeAreaView>
-            <Footer />
         </>
     );
 }
@@ -44,22 +67,8 @@ const styles = StyleSheet.create({
         alignItems: 'center',
     },
     form: {
-        flex: 0.5,
         width: "75%",
         justifyContent: 'center',
         marginTop: 50,
     },
-    button: {
-        backgroundColor: colors("verdeescuro"),
-        padding: 10,
-        width: '100%',
-        borderRadius: 12,
-        top: 15
-    },
-    textButton: {
-        fontSize: 20,
-        color: colors("branco"),
-        textTransform: 'uppercase',
-        textAlign: 'center'
-    }
 });

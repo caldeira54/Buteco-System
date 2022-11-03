@@ -1,6 +1,5 @@
-import React, { useState } from 'react';
-import { View, StyleSheet, ScrollView } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
+import React, { useState, useEffect } from 'react';
+import { View, StyleSheet, ScrollView, Keyboard, SafeAreaView } from 'react-native';
 import colors from '../global/colors';
 import Header from '../components/Header.js';
 import InputCadastro from '../components/InputCadastro.js';
@@ -11,6 +10,27 @@ export default function Buy() {
     const [funcionario, setFuncionario] = useState('');
     const [valor, setValor] = useState('');
     const [data, setData] = useState('');
+    const [keyboardVisible, setKeyboardVisible] = useState(false);
+
+    useEffect(() => {
+        const keyboardDidShowListener = Keyboard.addListener(
+            'keyboardDidShow',
+            () => {
+                setKeyboardVisible(true);
+            }
+        );
+        const keyboardDidHideListener = Keyboard.addListener(
+            'keyboardDidHide',
+            () => {
+                setKeyboardVisible(false);
+            }
+        );
+
+        return () => {
+            keyboardDidHideListener.remove();
+            keyboardDidShowListener.remove();
+        };
+    }, []);
 
     return (
         <>
@@ -19,21 +39,23 @@ export default function Buy() {
                 <ScrollView contentContainerStyle={{ flex: 1, alignItems: 'center' }}>
                     <View style={styles.form}>
                         <View>
-                            <InputCadastro placeholder="Funcionário" icon='funcionario' onChange={setFuncionario} />
+                            <InputCadastro placeholder="Funcionário" icon='funcionario' value={funcionario} onChange={setFuncionario} />
                         </View>
 
                         <View>
-                            <InputCadastro placeholder="Valor" icon='valor' onChange={setValor} />
+                            <InputCadastro placeholder="Valor" icon='valor' value={valor} onChange={setValor} />
                         </View>
 
                         <View>
-                            <InputCadastro placeholder="Data" icon='data' onChange={setData} />
+                            <InputCadastro placeholder="Data" icon='data' value={data} onChange={setData} />
                         </View>
                     </View>
                     <BtnCadastrar />
                 </ScrollView>
+                {!keyboardVisible && (
+                    <Footer />
+                )}
             </SafeAreaView>
-            <Footer />
         </>
     );
 }
@@ -45,8 +67,8 @@ const styles = StyleSheet.create({
         alignItems: 'center',
     },
     form: {
-        flex: 0.5,
         width: "75%",
         justifyContent: 'center',
+        marginTop: 50,
     },
 });

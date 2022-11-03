@@ -3,7 +3,7 @@ import { TextInput, StyleSheet, KeyboardAvoidingView, Platform, View, Image } fr
 
 import colors from '../global/colors';
 
-export default function Input({ placeholder, icon = null, onChange, keyboardType, value }) {
+export default function InputCadastro({ placeholder, icon = null, onChange, keyboardType, value }) {
 
     return (
         <KeyboardAvoidingView behavior={Platform.OS === "ios" ? "padding" : "height"}>

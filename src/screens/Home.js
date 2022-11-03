@@ -23,7 +23,7 @@ export default function Home() {
         <View style={styles.container}>
             <Exit />
             <Image
-                source={require('../assets/img/fundomain.png')}
+                source={require('../assets/img/homer.png')}
                 resizeMode="contain"
                 style={{ width: '70%', height: '40%' }}
             />

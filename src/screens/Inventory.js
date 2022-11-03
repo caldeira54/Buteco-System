@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { View, StyleSheet, SafeAreaView, ScrollView } from 'react-native';
+import React, { useState, useEffect } from 'react';
+import { View, StyleSheet, SafeAreaView, ScrollView, Keyboard } from 'react-native';
 import colors from '../global/colors';
 import Header from '../components/Header.js';
 import InputCadastro from '../components/InputCadastro.js';
@@ -11,6 +11,27 @@ export default function Inventory() {
     const [produto, setProduto] = useState('');
     const [preco, setPreco] = useState('');
     const [quantidade, setQuantidade] = useState('');
+    const [keyboardVisible, setKeyboardVisible] = useState(false);
+
+    useEffect(() => {
+        const keyboardDidShowListener = Keyboard.addListener(
+            'keyboardDidShow',
+            () => {
+                setKeyboardVisible(true);
+            }
+        );
+        const keyboardDidHideListener = Keyboard.addListener(
+            'keyboardDidHide',
+            () => {
+                setKeyboardVisible(false);
+            }
+        );
+
+        return () => {
+            keyboardDidHideListener.remove();
+            keyboardDidShowListener.remove();
+        };
+    }, []);
 
     return (
         <>
@@ -19,24 +40,26 @@ export default function Inventory() {
                 <ScrollView contentContainerStyle={{ flex: 1, alignItems: 'center' }}>
                     <View style={styles.form}>
                         <View>
-                            <InputCadastro placeholder="Fornecedor" icon='cnpj' onChange={setFornecedor} />
+                            <InputCadastro placeholder="Fornecedor" icon='cnpj' value={fornecedor} onChange={setFornecedor} />
                         </View>
 
                         <View>
-                            <InputCadastro placeholder="Produto" icon='produto' onChange={setProduto} />
+                            <InputCadastro placeholder="Produto" icon='produto' value={produto} onChange={setProduto} />
                         </View>
 
                         <View>
-                            <InputCadastro placeholder="Preço" icon='valor' onChange={setPreco} />
+                            <InputCadastro placeholder="Preço" icon='valor' value={preco} onChange={setPreco} />
                         </View>
                         <View>
-                            <InputCadastro placeholder="Quantidade" icon='quantidade' onChange={setQuantidade} />
+                            <InputCadastro placeholder="Quantidade" icon='quantidade' value={quantidade} onChange={setQuantidade} />
                         </View>
                     </View>
                     <BtnCadastrar />
                 </ScrollView>
+                {!keyboardVisible && (
+                    <Footer />
+                )}
             </SafeAreaView>
-            <Footer />
         </>
     );
 }
@@ -48,22 +71,8 @@ const styles = StyleSheet.create({
         alignItems: 'center',
     },
     form: {
-        flex: 0.5,
         width: "75%",
         justifyContent: 'center',
         marginTop: 50,
     },
-    button: {
-        backgroundColor: colors("verdeescuro"),
-        padding: 10,
-        width: '100%',
-        borderRadius: 12,
-        top: 15
-    },
-    textButton: {
-        fontSize: 20,
-        color: colors("branco"),
-        textTransform: 'uppercase',
-        textAlign: 'center'
-    }
 });
