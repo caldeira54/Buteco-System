@@ -15,7 +15,7 @@ export default function Provider() {
 
 const styles = StyleSheet.create({
     button: {
-        backgroundColor: colors("verdeescuro"),
+        backgroundColor: colors("vermelhoescuro"),
         padding: 10,
         width: '100%',
         borderRadius: 12,

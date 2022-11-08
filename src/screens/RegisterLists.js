@@ -99,7 +99,7 @@ export default function RegisterLists() {
 const styles = StyleSheet.create({
     container: {
         height: '92%',
-        backgroundColor: colors("verdeclaro"),
+        backgroundColor: colors("pretosignin"),
         alignItems: 'center',
     },
     list: {

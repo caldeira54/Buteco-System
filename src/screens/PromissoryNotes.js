@@ -69,7 +69,7 @@ export default function PromissoryNotes() {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: colors("verdeclaro"),
+        backgroundColor: colors("pretosignin"),
         alignItems: 'center',
     },
     form: {

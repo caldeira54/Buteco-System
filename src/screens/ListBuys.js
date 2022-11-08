@@ -129,7 +129,7 @@ export default function ListBuys() {
 const styles = StyleSheet.create({
     container: {
         height: '92%',
-        backgroundColor: colors("verdeclaro"),
+        backgroundColor: colors("pretosignin"),
         alignItems: 'center'
     },
     position: {
@@ -145,7 +145,7 @@ const styles = StyleSheet.create({
         height: '60%',
         width: '95%',
         marginTop: 20,
-        backgroundColor: colors("verdeescuro"),
+        backgroundColor: colors("preto"),
         borderRadius: 10,
     },
     inLine: {

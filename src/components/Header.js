@@ -16,7 +16,7 @@ export default function Header({ title }) {
 const styles = StyleSheet.create({
     container: {
         marginTop: 30,
-        backgroundColor: colors('cinzaescuro'),
+        backgroundColor: colors('preto'),
         height: 80,
         margin: 20,
         borderRadius: 12,
