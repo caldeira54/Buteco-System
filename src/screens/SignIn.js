@@ -3,17 +3,18 @@ import { useNavigation } from '@react-navigation/native';
 import { View, Text, StyleSheet, Image, TouchableOpacity, TouchableWithoutFeedback, Keyboard, SafeAreaView, StatusBar } from 'react-native';
 import Input from '../components/Input';
 import colors from '../global/colors';
-import { cpfMask } from '../utils/functions';
 
 export default function SignIn() {
-    const [user, setUser] = useState('');
-    const [password, setPassword] = useState('');
+    const [usuario, setUsuario] = useState('');
+    const [senha, setSenha] = useState('');
 
     const navigation = useNavigation();
 
     function handleSignIn() {
         navigation.navigate("home");
     }
+
+    console.log(senha);
 
     return (
         <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
@@ -25,9 +26,9 @@ export default function SignIn() {
                     style={{ width: '60%', height: '40%' }}
                 />
                 <View style={styles.form}>
-                    <Input placeholder="Usuário" keyboardType="email-address" icon="user" value={user} onChange={(text) => setUser(cpfMask(text))} />
+                    <Input placeholder="Usuário" keyboardType="email-address" icon="user" value={usuario} onChange={setUsuario} />
 
-                    <Input placeholder="Senha" security autoCorrect={false} returnKeyType="go" icon="pass" />
+                    <Input placeholder="Senha" security autoCorrect={false} returnKeyType="go" icon="pass" value={senha} onChange={setSenha} />
 
                     <TouchableOpacity style={styles.button} onPress={handleSignIn}>
                         <Text style={styles.textButton}>

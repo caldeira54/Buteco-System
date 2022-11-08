@@ -135,7 +135,7 @@ export default function ListProducts() {
 
 const styles = StyleSheet.create({
     container: {
-        height: '88%',
+        height: '92%',
         backgroundColor: colors("verdeclaro"),
         alignItems: 'center'
     },
