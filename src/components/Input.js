@@ -4,7 +4,7 @@ import { User, Eye, EyeSlash, Key } from 'phosphor-react-native';
 
 import colors from '../global/colors';
 
-export default function Input({ placeholder, security = false, keyboardType, autoCorrect = true, returnKeyType = "next", icon = null }) {
+export default function Input({ placeholder, security = false, keyboardType, autoCorrect = true, returnKeyType = "next", icon = null, value, onChange }) {
     const [hidePass, setHidePass] = useState(true);
 
     return (
@@ -30,6 +30,8 @@ export default function Input({ placeholder, security = false, keyboardType, aut
                     keyboardType={keyboardType}
                     autoCorrect={autoCorrect}
                     returnKeyType={returnKeyType}
+                    value={value}
+                    onChangeText={onChange}
                     style={styles.input}
                 />
                 {security && (

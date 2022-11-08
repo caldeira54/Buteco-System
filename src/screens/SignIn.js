@@ -1,10 +1,14 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useNavigation } from '@react-navigation/native';
 import { View, Text, StyleSheet, Image, TouchableOpacity, TouchableWithoutFeedback, Keyboard, SafeAreaView, StatusBar } from 'react-native';
 import Input from '../components/Input';
 import colors from '../global/colors';
+import { cpfMask } from '../utils/functions';
 
 export default function SignIn() {
+    const [user, setUser] = useState('');
+    const [password, setPassword] = useState('');
+
     const navigation = useNavigation();
 
     function handleSignIn() {
@@ -21,7 +25,7 @@ export default function SignIn() {
                     style={{ width: '60%', height: '40%' }}
                 />
                 <View style={styles.form}>
-                    <Input placeholder="Usuário" keyboardType="email-address" icon="user" />
+                    <Input placeholder="Usuário" keyboardType="email-address" icon="user" value={user} onChange={(text) => setUser(cpfMask(text))} />
 
                     <Input placeholder="Senha" security autoCorrect={false} returnKeyType="go" icon="pass" />
 
