@@ -5,6 +5,7 @@ import Header from '../components/Header.js';
 import InputCadastro from '../components/InputCadastro.js';
 import Footer from '../components/Footer.js';
 import BtnCadastrar from '../components/BtnCadastrar.js';
+import { maskDate, maskMoney } from '../utils/functions';
 
 export default function Sale() {
     const [funcionario, setFuncionario] = useState('');
@@ -47,7 +48,7 @@ export default function Sale() {
                         </View>
 
                         <View>
-                            <InputCadastro placeholder="Data" icon='data' value={data} onChange={setData} keyboardType="number-pad" />
+                            <InputCadastro placeholder="Data" icon='data' value={data} onChange={text => setData(maskDate(text))} keyboardType="number-pad" />
                         </View>
                     </View>
                     <BtnCadastrar />

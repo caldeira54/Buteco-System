@@ -5,6 +5,7 @@ import Header from '../components/Header.js';
 import InputCadastro from '../components/InputCadastro.js';
 import Footer from '../components/Footer';
 import BtnCadastrar from '../components/BtnCadastrar.js';
+import {maskDate} from '../utils/functions';
 
 export default function Buy() {
     const [funcionario, setFuncionario] = useState('');
@@ -39,15 +40,15 @@ export default function Buy() {
                 <ScrollView contentContainerStyle={{ flex: 1, alignItems: 'center' }}>
                     <View style={styles.form}>
                         <View>
-                            <InputCadastro placeholder="Funcionário" icon='funcionario' value={funcionario} onChange={setFuncionario} />
+                            <InputCadastro placeholder="Funcionário" icon='funcionario' value={funcionario} onChange={funcionario} />
                         </View>
 
                         <View>
-                            <InputCadastro placeholder="Valor" icon='valor' value={valor} onChange={setValor} />
+                            <InputCadastro placeholder="Valor" icon='valor' value={valor} onChange={setValor} keyboardType="number-pad"/>
                         </View>
 
                         <View>
-                            <InputCadastro placeholder="Data" icon='data' value={data} onChange={setData} />
+                            <InputCadastro placeholder="Data" icon='data' value={data} onChange={text => setData(maskDate(text))} keyboardType="number-pad"/>
                         </View>
                     </View>
                     <BtnCadastrar />

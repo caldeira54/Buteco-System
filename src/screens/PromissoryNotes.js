@@ -5,6 +5,7 @@ import Header from '../components/Header.js';
 import InputCadastro from '../components/InputCadastro.js';
 import Footer from '../components/Footer';
 import BtnCadastrar from '../components/BtnCadastrar.js';
+import { maskDate } from '../utils/functions';
 
 export default function PromissoryNotes() {
     const [fornecedor, setFornecedor] = useState('');
@@ -44,14 +45,14 @@ export default function PromissoryNotes() {
                         </View>
 
                         <View>
-                            <InputCadastro placeholder="Valor" icon='valor' value={valor} onChange={setValor} />
+                            <InputCadastro placeholder="Valor" icon='valor' value={valor} onChange={setValor} keyboardType="number-pad" />
                         </View>
 
                         <View>
-                            <InputCadastro placeholder="Data da Compra" icon='data' value={dataCompra} onChange={setDataCompra} />
+                            <InputCadastro placeholder="Data da Compra" icon='data' value={dataCompra} onChange={text => setDataCompra(maskDate(text))} keyboardType="number-pad" />
                         </View>
                         <View>
-                            <InputCadastro placeholder="Data do Pagamento" icon='data' value={dataPgto} onChange={setDataPgto} />
+                            <InputCadastro placeholder="Data do Pagamento" icon='data' value={dataPgto} onChange={text => setDataPgto(maskDate(text))} keyboardType="number-pad" />
                         </View>
                     </View>
                     <BtnCadastrar />

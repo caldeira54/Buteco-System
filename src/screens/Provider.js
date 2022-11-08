@@ -5,6 +5,7 @@ import Header from '../components/Header.js';
 import InputCadastro from '../components/InputCadastro.js';
 import Footer from '../components/Footer';
 import BtnCadastrar from '../components/BtnCadastrar.js';
+import { cnpjMask } from '../utils/functions';
 
 export default function Provider() {
     const [cnpj, setCnpj] = useState('');
@@ -39,7 +40,7 @@ export default function Provider() {
                 <ScrollView contentContainerStyle={{ flex: 1, alignItems: 'center' }}>
                     <View style={styles.form}>
                         <View>
-                            <InputCadastro placeholder="Cnpj" icon='cnpj' value={cnpj} onChange={setCnpj} />
+                            <InputCadastro placeholder="Cnpj" icon='cnpj' value={cnpj} onChange={text => setCnpj(cnpjMask(text))} keyboardType="number-pad" />
                         </View>
 
                         <View>

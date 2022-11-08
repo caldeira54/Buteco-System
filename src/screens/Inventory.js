@@ -48,10 +48,10 @@ export default function Inventory() {
                         </View>
 
                         <View>
-                            <InputCadastro placeholder="Preço" icon='valor' value={preco} onChange={setPreco} />
+                            <InputCadastro placeholder="Preço" icon='valor' value={preco} onChange={setPreco} keyboardType="number-pad" />
                         </View>
                         <View>
-                            <InputCadastro placeholder="Quantidade" icon='quantidade' value={quantidade} onChange={setQuantidade} />
+                            <InputCadastro placeholder="Quantidade" icon='quantidade' value={quantidade} onChange={setQuantidade} keyboardType="number-pad" />
                         </View>
                     </View>
                     <BtnCadastrar />

@@ -47,7 +47,7 @@ export default function Product() {
                         </View>
 
                         <View>
-                            <InputCadastro placeholder="Preço" icon='valor' value={preco} onChange={setPreco} />
+                            <InputCadastro placeholder="Preço" icon='valor' value={preco} onChange={setPreco} keyboardType="number-pad"/>
                         </View>
                     </View>
                     <BtnCadastrar />
