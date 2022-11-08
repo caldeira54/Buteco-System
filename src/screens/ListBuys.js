@@ -128,7 +128,7 @@ export default function ListBuys() {
 
 const styles = StyleSheet.create({
     container: {
-        height: '88%',
+        height: '92%',
         backgroundColor: colors("verdeclaro"),
         alignItems: 'center'
     },
