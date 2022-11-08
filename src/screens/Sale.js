@@ -44,7 +44,7 @@ export default function Sale() {
                         </View>
 
                         <View>
-                            <InputCadastro placeholder="Valor" icon='valor' value={valor} onChange={setValor} keyboardType="number-pad" />
+                            <InputCadastro placeholder="Valor" icon='valor' value={valor} onChange={text => setValor(maskMoney(text))} keyboardType="number-pad" />
                         </View>
 
                         <View>

@@ -42,7 +42,7 @@ export default function SignIn() {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: colors("verdeclaro"),
+        backgroundColor: colors("pretosignin"),
         justifyContent: 'center',
         alignItems: 'center'
     },
@@ -52,7 +52,7 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
     },
     button: {
-        backgroundColor: colors("verdeescuro"),
+        backgroundColor: colors("amarelo"),
         padding: 10,
         width: '100%',
         borderRadius: 12,
@@ -60,7 +60,7 @@ const styles = StyleSheet.create({
     },
     textButton: {
         fontSize: 20,
-        color: colors("branco"),
+        color: colors("preto"),
         textTransform: 'uppercase',
         textAlign: 'center'
     }

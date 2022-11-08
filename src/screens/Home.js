@@ -69,7 +69,7 @@ export default function Home() {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: colors("verdeclaro"),
+        backgroundColor: colors("pretosignin"),
         alignItems: 'center'
     },
     tab: {
@@ -85,12 +85,13 @@ const styles = StyleSheet.create({
     box: {
         flexDirection: 'column',
         justifyContent: 'space-around',
-        backgroundColor: colors("verdeescuro"),
+        backgroundColor: colors("preto"),
         alignItems: 'center',
         width: '77%',
         height: '30%',
         borderRadius: 15,
         paddingVertical: 5,
+        elevation: 50,
     },
     icon: {
         width: 50,
@@ -119,7 +120,7 @@ const styles = StyleSheet.create({
     },
     textReceita: {
         fontSize: 17,
-        color: colors('verdeclaro'),
+        color: colors('verde'),
         textAlign: 'center',
     },
     textDespesa: {
