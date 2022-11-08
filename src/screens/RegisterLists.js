@@ -83,6 +83,7 @@ export default function RegisterLists() {
                 <Header title="CADASTRO" />
                 <View style={styles.list}>
                     <FlatList
+                        showsVerticalScrollIndicator={false}
                         data={DATA}
                         renderItem={renderItem}
                         keyExtractor={(item) => item.id}

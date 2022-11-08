@@ -93,6 +93,7 @@ export default function ReportLists() {
                 <Header title="RELATÓRIOS" />
                 <View style={styles.list}>
                     <FlatList
+                        showsVerticalScrollIndicator={false}
                         data={DATA}
                         renderItem={renderItem}
                         keyExtractor={(item) => item.id}
