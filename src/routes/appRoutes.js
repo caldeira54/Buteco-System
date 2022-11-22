@@ -16,12 +16,11 @@ import ListProducts from '../screens/ListProducts';
 import ListNotes from '../screens/ListNotes';
 import ListInventorys from '../screens/ListInventorys';
 
-const {Navigator, Screen} = createNativeStackNavigator();
+const { Navigator, Screen } = createNativeStackNavigator();
 
-export default function AppRoutes(){
-    return(
-        <Navigator screenOptions={{ headerShown: false}}>
-            <Screen name='signIn' component={SignIn} />
+export default function AppRoutes() {
+    return (
+        <Navigator screenOptions={{ headerShown: false }}>
             <Screen name='home' component={Home} />
 
             {/* Telas de cadastro */}

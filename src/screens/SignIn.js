@@ -1,17 +1,56 @@
 import React, { useState } from 'react';
+import auth from '@react-native-firebase/auth';
 import { useNavigation } from '@react-navigation/native';
-import { View, Text, StyleSheet, Image, TouchableOpacity, TouchableWithoutFeedback, Keyboard, SafeAreaView, StatusBar } from 'react-native';
+import { Alert, View, Text, StyleSheet, Image, TouchableOpacity, TouchableWithoutFeedback, Keyboard, SafeAreaView, StatusBar } from 'react-native';
 import Input from '../components/Input';
 import colors from '../global/colors';
 
 export default function SignIn() {
-    const [usuario, setUsuario] = useState('');
-    const [senha, setSenha] = useState('');
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const [isLoading, setIsLoading] = useState(false);
 
     const navigation = useNavigation();
 
     function handleSignIn() {
-        navigation.navigate("home");
+        if (!email && !password) {
+            return Alert.alert('Erro', 'Preencha todos os campos.');
+        }
+
+        if (email && !password) {
+            return Alert.alert('Erro', 'Informe a senha.');
+        }
+
+        if (!email && password) {
+            return Alert.alert('Erro', 'Informe o e-mail.');
+        }
+
+        setIsLoading(true);
+
+        auth()
+            .signInWithEmailAndPassword(email, password)
+            .catch((error) => {
+                console.log(error);
+                setIsLoading(false);
+
+                console.log('code', error.code);
+
+                if (error.code === 'auth/invalid-email') {
+                    return Alert.alert('Erro', 'E-mail inválido.');
+                }
+
+                if (error.code === 'auth/wrong-password') {
+                    return Alert.alert('Erro', 'E-mail ou senha inválida.');
+                }
+
+                if (error.code === 'auth/user-not-found') {
+                    return Alert.alert('Erro', 'E-mail ou senha inválida.');
+                }
+
+                return Alert.alert('Erro', 'Ocorreu um erro ao fazer login.');
+            });
+
+        //navigation.navigate("home");
     }
 
     return (
@@ -24,9 +63,9 @@ export default function SignIn() {
                     style={{ width: '60%', height: '40%' }}
                 />
                 <View style={styles.form}>
-                    <Input placeholder="Usuário" keyboardType="email-address" icon="user" value={usuario} onChange={setUsuario} />
+                    <Input placeholder="Usuário" keyboardType="email-address" icon="user" value={email} onChange={setEmail} />
 
-                    <Input placeholder="Senha" security autoCorrect={false} returnKeyType="go" icon="pass" value={senha} onChange={setSenha} />
+                    <Input placeholder="Senha" security autoCorrect={false} returnKeyType="go" icon="pass" value={password} onChange={setPassword} />
 
                     <TouchableOpacity style={styles.button} onPress={handleSignIn}>
                         <Text style={styles.textButton}>
