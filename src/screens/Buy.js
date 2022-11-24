@@ -40,7 +40,7 @@ export default function Buy() {
                 <ScrollView contentContainerStyle={{ flex: 1, alignItems: 'center' }}>
                     <View style={styles.form}>
                         <View>
-                            <InputCadastro placeholder="Funcionário" icon='funcionario' value={funcionario} onChange={funcionario} />
+                            <InputCadastro placeholder="Funcionário" icon='funcionario' value={funcionario} onChange={setFuncionario} />
                         </View>
 
                         <View>
