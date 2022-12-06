@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import auth from '@react-native-firebase/auth';
 import { useNavigation } from '@react-navigation/native';
 import { Alert, View, Text, StyleSheet, Image, TouchableOpacity, TouchableWithoutFeedback, Keyboard, SafeAreaView, StatusBar } from 'react-native';
@@ -9,25 +9,26 @@ export default function SignIn() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [isLoading, setIsLoading] = useState(false);
+    const [valid, setValid] = useState(false);
 
-    const navigation = useNavigation();
+    useEffect(() => {
 
-    function handleSignIn() {
-        if (!email && !password) {
-            return Alert.alert('Erro', 'Preencha todos os campos.');
+        if (email && password) {
+            setValid(true);
+        }else{
+            setValid(false);
         }
+    }, [email, password])
 
-        if (email && !password) {
-            return Alert.alert('Erro', 'Informe a senha.');
-        }
+    function invalid() {
+        return Alert.alert('Erro', 'Preencha todos os campos.');
+    }
 
-        if (!email && password) {
-            return Alert.alert('Erro', 'Informe o e-mail.');
-        }
+    async function handleSignIn() {
 
         setIsLoading(true);
 
-        auth()
+        await auth()
             .signInWithEmailAndPassword(email, password)
             .catch((error) => {
                 console.log(error);
@@ -49,8 +50,6 @@ export default function SignIn() {
 
                 return Alert.alert('Erro', 'Ocorreu um erro ao fazer login.');
             });
-
-        //navigation.navigate("home");
     }
 
     return (
@@ -63,11 +62,11 @@ export default function SignIn() {
                     style={{ width: '60%', height: '40%' }}
                 />
                 <View style={styles.form}>
-                    <Input placeholder="Usuário" keyboardType="email-address" icon="user" value={email} onChange={setEmail} />
+                    <Input placeholder="Email" keyboardType="email-address" icon="user" value={email} onChange={setEmail} />
 
                     <Input placeholder="Senha" security autoCorrect={false} returnKeyType="go" icon="pass" value={password} onChange={setPassword} />
 
-                    <TouchableOpacity style={styles.button} onPress={handleSignIn}>
+                    <TouchableOpacity style={styles.button} onPress={valid ? handleSignIn : invalid}>
                         <Text style={styles.textButton}>
                             Entrar
                         </Text>

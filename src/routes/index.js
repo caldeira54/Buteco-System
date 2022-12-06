@@ -23,6 +23,8 @@ export default function Routes() {
         return <Loading />;
     }
 
+    console.log(user);
+
     return (
         <NavigationContainer>
             {user ?
