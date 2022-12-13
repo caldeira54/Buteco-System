@@ -12,10 +12,9 @@ export default function SignIn() {
     const [valid, setValid] = useState(false);
 
     useEffect(() => {
-
         if (email && password) {
             setValid(true);
-        }else{
+        } else {
             setValid(false);
         }
     }, [email, password])
@@ -24,11 +23,18 @@ export default function SignIn() {
         return Alert.alert('Erro', 'Preencha todos os campos.');
     }
 
-    async function handleSignIn() {
+    useEffect(() => {
+        console.log('email: ', email)
+        console.log('password: ', password)
+    }, [])
+
+    function handleSignIn() {
 
         setIsLoading(true);
 
-        await auth()
+        console.log({ email, password })
+
+        auth()
             .signInWithEmailAndPassword(email, password)
             .catch((error) => {
                 console.log(error);

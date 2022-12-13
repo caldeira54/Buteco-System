@@ -12,10 +12,11 @@ export default function Routes() {
     useEffect(() => {
         const subscriber = auth()
             .onAuthStateChanged(response => {
+                console.log('response user', response)
                 setUser(response);
                 setLoading(false);
             });
-            //console.log(subscriber);
+        //console.log(subscriber);
         return subscriber;
     }, []);
 
@@ -23,7 +24,7 @@ export default function Routes() {
         return <Loading />;
     }
 
-    console.log(user);
+    console.log('user', user);
 
     return (
         <NavigationContainer>

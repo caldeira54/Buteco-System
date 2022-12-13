@@ -30,7 +30,7 @@ export default function Input({ placeholder, security = false, keyboardType, aut
                     keyboardType={keyboardType}
                     autoCorrect={autoCorrect}
                     returnKeyType={returnKeyType}
-                    onChange={onChange}
+                    onChangeText={onChange}
                     style={styles.input}
                     value={value}
                 />
