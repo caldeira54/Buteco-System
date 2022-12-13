@@ -13,6 +13,19 @@ export default function PromissoryNotes() {
     const [dataCompra, setDataCompra] = useState('');
     const [dataPgto, setDataPgto] = useState('');
     const [keyboardVisible, setKeyboardVisible] = useState(false);
+    const [valid, setValid] = useState(false);
+
+    useEffect(() => {
+        if (fornecedor && valor && dataCompra && dataPgto) {
+            setValid(true);
+        } else {
+            setValid(false);
+        }
+    }, [fornecedor, valor, dataCompra, dataPgto])
+
+    function invalid() {
+        return Alert.alert('Erro', 'Preencha todos os campos.');
+    }
 
     useEffect(() => {
         const keyboardDidShowListener = Keyboard.addListener(
@@ -55,7 +68,11 @@ export default function PromissoryNotes() {
                             <InputCadastro placeholder="Data do Pagamento" icon='data' value={dataPgto} onChange={text => setDataPgto(maskDate(text))} keyboardType="number-pad" />
                         </View>
                     </View>
-                    <BtnCadastrar />
+                    <View>
+                        <TouchableOpacity style={styles.button} onPress={valid ? handleAdd : invalid}>
+                            <Text style={styles.textButton}>Cadastrar</Text>
+                        </TouchableOpacity>
+                    </View>
                 </ScrollView>
                 {!keyboardVisible && (
                     <Footer />
@@ -77,4 +94,18 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         marginTop: 50,
     },
+    button: {
+        backgroundColor: colors("verdeclaro"),
+        width: 200,
+        height: 50,
+        borderRadius: 12,
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+    textButton: {
+        fontSize: 20,
+        color: colors("branco"),
+        textTransform: 'uppercase',
+        textAlign: 'center'
+    }
 });
