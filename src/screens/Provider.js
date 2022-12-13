@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { View, SafeAreaView, StyleSheet, ScrollView, Keyboard } from 'react-native';
+import { View, SafeAreaView, StyleSheet, ScrollView, Keyboard, TouchableOpacity, Text, Alert } from 'react-native';
 import colors from '../global/colors';
 import Header from '../components/Header.js';
 import InputCadastro from '../components/InputCadastro.js';
 import Footer from '../components/Footer';
-import BtnCadastrar from '../components/BtnCadastrar.js';
 import { cnpjMask } from '../utils/functions';
 
 export default function Provider() {
@@ -12,6 +11,19 @@ export default function Provider() {
     const [nome, setNome] = useState('');
     const [endereco, setEndereco] = useState('');
     const [keyboardVisible, setKeyboardVisible] = useState(false);
+    const [valid, setValid] = useState(false);
+
+    useEffect(() => {
+        if (cnpj && nome && endereco) {
+            setValid(true);
+        } else {
+            setValid(false);
+        }
+    }, [cnpj, nome, endereco])
+
+    function invalid() {
+        return Alert.alert('Erro', 'Preencha todos os campos.');
+    }
 
     useEffect(() => {
         const keyboardDidShowListener = Keyboard.addListener(
@@ -51,7 +63,11 @@ export default function Provider() {
                             <InputCadastro placeholder="Endereço" icon='endereco' value={endereco} onChange={setEndereco} />
                         </View>
                     </View>
-                    <BtnCadastrar />
+                    <View>
+                        <TouchableOpacity style={styles.button} onPress={valid ? handleAdd : invalid}>
+                            <Text style={styles.textButton}>Cadastrar</Text>
+                        </TouchableOpacity>
+                    </View>
                 </ScrollView>
                 {!keyboardVisible && (
                     <Footer />
@@ -72,4 +88,18 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         marginTop: 50,
     },
+    button: {
+        backgroundColor: colors("verdeclaro"),
+        width: 200,
+        height: 50,
+        borderRadius: 12,
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+    textButton: {
+        fontSize: 20,
+        color: colors("branco"),
+        textTransform: 'uppercase',
+        textAlign: 'center'
+    }
 });
