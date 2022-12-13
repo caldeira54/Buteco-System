@@ -2,14 +2,11 @@ import React from 'react';
 import { View, StyleSheet, Text, TouchableOpacity } from 'react-native';
 import colors from '../global/colors';
 
-export default function Provider() {
+export default function BtnCadastrar({ onPress, title }) {
     return (
-        <View>
-            <TouchableOpacity style={styles.button}>
-                <Text style={styles.textButton}>Cadastrar</Text>
-            </TouchableOpacity>
-        </View>
-
+        <TouchableOpacity style={styles.button} onPress={onPress}>
+            <Text style={styles.textButton}>{title}</Text>
+        </TouchableOpacity>
     );
 }
 
