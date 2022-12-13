@@ -14,9 +14,8 @@ export default function ListSales() {
     const [data, setData] = useState([]);
 
     const renderItem = ({ item }) => (
-        <Item description={item.description} value={item.val} />
+        <Item funcionario={item.funcionario} valor={item.valor} data={item.data} />
     );
-
 
     const Item = ({ funcionario, valor, data }) => (
         <CardLine item1={funcionario} item2={valor} item3={data} />
