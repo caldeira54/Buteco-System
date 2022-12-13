@@ -1,16 +1,28 @@
 import React, { useState, useEffect } from 'react';
-import { View, StyleSheet, SafeAreaView, ScrollView, Keyboard } from 'react-native';
+import { View, StyleSheet, SafeAreaView, ScrollView, Keyboard, TouchableOpacity, Text, Alert } from 'react-native';
 import colors from '../global/colors';
 import Header from '../components/Header.js';
 import InputCadastro from '../components/InputCadastro.js';
 import Footer from '../components/Footer';
-import BtnCadastrar from '../components/BtnCadastrar.js';
 
 export default function Product() {
     const [funcionario, setFuncionario] = useState('');
     const [produto, setProduto] = useState('');
     const [preco, setPreco] = useState('');
     const [keyboardVisible, setKeyboardVisible] = useState(false);
+    const [valid, setValid] = useState(false);
+
+    useEffect(() => {
+        if (funcionario && produto && preco) {
+            setValid(true);
+        } else {
+            setValid(false);
+        }
+    }, [funcionario, produto, preco])
+
+    function invalid() {
+        return Alert.alert('Erro', 'Preencha todos os campos.');
+    }
 
     useEffect(() => {
         const keyboardDidShowListener = Keyboard.addListener(
@@ -47,10 +59,14 @@ export default function Product() {
                         </View>
 
                         <View>
-                            <InputCadastro placeholder="Preço" icon='valor' value={preco} onChange={setPreco} keyboardType="number-pad"/>
+                            <InputCadastro placeholder="Preço" icon='valor' value={preco} onChange={setPreco} keyboardType="number-pad" />
                         </View>
                     </View>
-                    <BtnCadastrar />
+                    <View>
+                        <TouchableOpacity style={styles.button} onPress={valid ? handleAdd : invalid}>
+                            <Text style={styles.textButton}>Cadastrar</Text>
+                        </TouchableOpacity>
+                    </View>
                 </ScrollView>
                 {!keyboardVisible && (
                     <Footer />
@@ -71,4 +87,18 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         marginTop: 50,
     },
+    button: {
+        backgroundColor: colors("verdeclaro"),
+        width: 200,
+        height: 50,
+        borderRadius: 12,
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+    textButton: {
+        fontSize: 20,
+        color: colors("branco"),
+        textTransform: 'uppercase',
+        textAlign: 'center'
+    }
 });
