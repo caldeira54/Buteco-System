@@ -1,10 +1,15 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import auth from '@react-native-firebase/auth';
 import { View, StyleSheet, Image, Text, TouchableOpacity } from 'react-native';
 import colors from '../global/colors';
 import { useNavigation } from '@react-navigation/native';
 import Exit from '../components/Exit';
+import { ModalUser } from '../components/Modal';
 
 export default function Home() {
+    const [user] = useState(auth().currentUser);
+    const [isModalVisible, setIsModalVisible] = useState(false);
+
     const navigation = useNavigation();
 
     function handleRegister() {
@@ -19,50 +24,61 @@ export default function Home() {
         navigation.navigate("report");
     }
 
+    useEffect(() => {
+        if (!user.displayName)
+            setIsModalVisible(true);
+    }, [user])
+
     return (
-        <View style={styles.container}>
-            <Exit />
-            <Image
-                source={require('../assets/img/homer.png')}
-                resizeMode="contain"
-                style={{ width: '70%', height: '40%' }}
-            />
-            <View style={styles.box}>
-                <View>
-                    <Text style={styles.title}>Receitas</Text>
-                    <View style={styles.line}></View>
-                    <Text style={styles.textReceita}>R$ 12000,00</Text>
+        <>
+            <View style={styles.container}>
+                <Exit />
+                <Image
+                    source={require('../assets/img/homer.png')}
+                    resizeMode="contain"
+                    style={{ width: '70%', height: '40%' }}
+                />
+                <View style={styles.box}>
+                    <View>
+                        <Text style={styles.title}>Receitas</Text>
+                        <View style={styles.line}></View>
+                        <Text style={styles.textReceita}>R$ 12000,00</Text>
+                    </View>
+                    <View>
+                        <Text style={styles.title}>Despesas</Text>
+                        <View style={styles.line}></View>
+                        <Text style={styles.textDespesa}>R$ 12000,00</Text>
+                    </View>
                 </View>
-                <View>
-                    <Text style={styles.title}>Despesas</Text>
-                    <View style={styles.line}></View>
-                    <Text style={styles.textDespesa}>R$ 12000,00</Text>
+                <View style={styles.tab}>
+                    <TouchableOpacity onPress={handleRegister}>
+                        <Image
+                            source={require('../assets/img/iconCadastrar.png')}
+                            resizeMode="contain"
+                            style={styles.icon}
+                        />
+                    </TouchableOpacity>
+                    <TouchableOpacity onPress={handleSale}>
+                        <Image
+                            source={require('../assets/img/iconCarteira.png')}
+                            resizeMode="contain"
+                            style={styles.icon}
+                        />
+                    </TouchableOpacity>
+                    <TouchableOpacity onPress={handleReport}>
+                        <Image
+                            source={require('../assets/img/iconListagem.png')}
+                            resizeMode="contain"
+                            style={styles.icon}
+                        />
+                    </TouchableOpacity>
                 </View>
+                <ModalUser
+                    visible={isModalVisible}
+                    onClose={() => setIsModalVisible(false)}
+                />
             </View>
-            <View style={styles.tab}>
-                <TouchableOpacity onPress={handleRegister}>
-                    <Image
-                        source={require('../assets/img/iconCadastrar.png')}
-                        resizeMode="contain"
-                        style={styles.icon}
-                    />
-                </TouchableOpacity>
-                <TouchableOpacity onPress={handleSale}>
-                    <Image
-                        source={require('../assets/img/iconCarteira.png')}
-                        resizeMode="contain"
-                        style={styles.icon}
-                    />
-                </TouchableOpacity>
-                <TouchableOpacity onPress={handleReport}>
-                    <Image
-                        source={require('../assets/img/iconListagem.png')}
-                        resizeMode="contain"
-                        style={styles.icon}
-                    />
-                </TouchableOpacity>
-            </View>
-        </View>
+        </>
     );
 }
 
