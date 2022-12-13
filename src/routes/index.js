@@ -15,7 +15,7 @@ export default function Routes() {
                 setUser(response);
                 setLoading(false);
             });
-
+            //console.log(subscriber);
         return subscriber;
     }, []);
 
