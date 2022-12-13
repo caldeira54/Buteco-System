@@ -5,8 +5,6 @@ import { View, Text, StyleSheet, TouchableOpacity, Image } from 'react-native';
 import colors from '../global/colors';
 
 export default function Exit() {
-    const navigation = useNavigation();
-
     function handleLogout() {
         auth()
             .signOut()

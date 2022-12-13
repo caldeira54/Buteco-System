@@ -3,7 +3,7 @@ import { TextInput, StyleSheet, KeyboardAvoidingView, Platform, View, Image } fr
 
 import colors from '../global/colors';
 
-export default function InputCadastro({ placeholder, icon = null, onChange, keyboardType, value }) {
+export default function InputCadastro({ placeholder, icon = null, onChange, keyboardType, value, disabled }) {
 
     return (
         <KeyboardAvoidingView behavior={Platform.OS === "ios" ? "padding" : "height"}>
@@ -69,6 +69,7 @@ export default function InputCadastro({ placeholder, icon = null, onChange, keyb
                     value={value}
                     placeholderTextColor={colors("cinzaclaro")}
                     style={styles.input}
+                    editable={disabled ? false : true}
                     onChangeText={onChange}
                     keyboardType={keyboardType || 'default'}
                 />
@@ -83,6 +84,7 @@ const styles = StyleSheet.create({
         width: '100%',
         height: 40,
         borderBottomWidth: 1,
+        borderBottomColor: '#EEE',
         padding: 4,
         marginBottom: 20,
         justifyContent: 'center',

@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import auth from '@react-native-firebase/auth';
-import { useNavigation } from '@react-navigation/native';
 import { Alert, View, Text, StyleSheet, Image, TouchableOpacity, TouchableWithoutFeedback, Keyboard, SafeAreaView, StatusBar } from 'react-native';
 import Input from '../components/Input';
 import colors from '../global/colors';

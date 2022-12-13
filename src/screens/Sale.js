@@ -1,15 +1,18 @@
 import React, { useState, useEffect } from 'react';
-import { View, SafeAreaView, StyleSheet, ScrollView, Keyboard, TouchableOpacity, Text, Alert } from 'react-native';
+import auth from '@react-native-firebase/auth';
+import { View, SafeAreaView, StyleSheet, ScrollView, Keyboard, TouchableOpacity, Text, Alert, Image } from 'react-native';
 import colors from '../global/colors';
 import Header from '../components/Header.js';
 import InputCadastro from '../components/InputCadastro.js';
 import Footer from '../components/Footer.js';
-import { maskDate, maskMoney } from '../utils/functions';
+import { maskDate } from '../utils/functions';
 import firestore from '@react-native-firebase/firestore';
+import CurrencyInput from 'react-native-currency-input';
 
 export default function Sale() {
+    const [user] = useState(auth().currentUser);
     const [funcionario, setFuncionario] = useState('');
-    const [valor, setValor] = useState('');
+    const [valor, setValor] = useState(0);
     const [data, setData] = useState('');
     const [keyboardVisible, setKeyboardVisible] = useState(false);
     const [valid, setValid] = useState(false);
@@ -36,8 +39,10 @@ export default function Sale() {
                 created_at: firestore.FieldValue.serverTimestamp()
             })
             .then(() => {
-                Alert.alert("Vendas", "Venda cadastrada com sucesso!")
-                navigation.goBack();
+                Alert.alert("Vendas", "Venda cadastrada com sucesso!");
+                setData('');
+                setFuncionario('');
+                setValor('');
             })
             .catch((error) => console.log(error));
     }
@@ -73,9 +78,28 @@ export default function Sale() {
                         </View>
 
                         <View>
-                            <InputCadastro placeholder="Valor" icon='valor' value={valor} onChange={setValor} keyboardType="number-pad" />
+                            {/* <InputCadastro placeholder="Valor" icon='valor' value={valor} onChange={value => setValor(formatMoney(value))} keyboardType="number-pad" /> */}
+                            <View style={styles.inputArea}>
+                                <Image
+                                    source={require('../assets/img/iconValor.png')}
+                                    resizeMode="contain"
+                                    style={styles.icon}
+                                />
+                                <CurrencyInput
+                                    style={{ color: "#FFF" }}
+                                    value={valor}
+                                    onChangeValue={setValor}
+                                    prefix="R$ "
+                                    delimiter="."
+                                    separator=","
+                                    precision={2}
+                                    minValue={0}
+                                    onChangeText={(formattedValue) => {
+                                        console.log(formattedValue); // R$ 100,00
+                                    }}
+                                />
+                            </View>
                         </View>
-
                         <View>
                             <InputCadastro placeholder="Data" icon='data' value={data} onChange={text => setData(maskDate(text))} keyboardType="number-pad" />
                         </View>
@@ -99,6 +123,35 @@ const styles = StyleSheet.create({
         flex: 1,
         backgroundColor: colors("pretosignin"),
         alignItems: 'center',
+    },
+    currencyInput: {
+        width: '100%',
+        height: 40,
+        borderBottomWidth: 1,
+        borderBottomColor: '#EEE',
+        padding: 4,
+        marginBottom: 20,
+        justifyContent: 'center',
+        alignItems: 'center',
+        marginRight: 110,
+        color: '#FFF'
+    },
+    inputArea: {
+        flexDirection: 'row',
+        width: '100%',
+        height: 40,
+        borderBottomWidth: 1,
+        borderBottomColor: '#EEE',
+        padding: 4,
+        marginBottom: 20,
+        alignItems: 'center',
+        marginRight: 110,
+        paddingHorizontal: 20
+    },
+    icon: {
+        width: '10%',
+        height: '50%',
+        tintColor: colors("cinzaclaro"),
     },
     form: {
         //flex: 0.5,

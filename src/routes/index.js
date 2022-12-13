@@ -12,7 +12,6 @@ export default function Routes() {
     useEffect(() => {
         const subscriber = auth()
             .onAuthStateChanged(response => {
-                console.log('response user', response)
                 setUser(response);
                 setLoading(false);
             });
