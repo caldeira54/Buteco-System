@@ -1,94 +1,53 @@
 import { View, StyleSheet, SafeAreaView, Text, FlatList } from 'react-native';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import colors from '../global/colors';
 import Footer from '../components/Footer';
 import BtnEditar from '../components/BtnEditar';
 import BtnExcluir from '../components/BtnExcluir';
 import Header from '../components/Header';
 import CardLine from '../components/CardLine';
+import firestore from '@react-native-firebase/firestore';
 
 export default function ListSales() {
     const [selectedId, setSelectedId] = useState(null);
 
-    const DATA = [
-        {
-            id: "1",
-            item1: "Mateus Henrique",
-            item2: "R$ 12000,00",
-            item3: "25/10/2022",
-            item4: null,
-        },
-        {
-            id: "2",
-            item1: "Jose",
-            item2: "R$ 1200,00",
-            item3: "25/10/2022",
-            item4: null,
-        },
-        {
-            id: "3",
-            item1: "Allan",
-            item2: "R$ 1200,00",
-            item3: "25/10/2022",
-            item4: null,
-        },
-        {
-            id: "4",
-            item1: "Maria Jose",
-            item2: "R$ 1200,00",
-            item3: "25/10/2022",
-            item4: null,
-        },
-        {
-            id: "5",
-            item1: "Guilherme",
-            item2: "R$ 1200,00",
-            item3: "25/10/2022",
-            item4: null,
-        },
-        {
-            id: "6",
-            item1: "Jose Maria",
-            item2: "R$ 1200,00",
-            item3: "25/10/2022",
-            item4: null,
-        },
-        {
-            id: "7",
-            item1: "Arthur",
-            item2: "R$ 1200,00",
-            item3: "25/10/2022",
-            item4: null,
-        },
-        {
-            id: "8",
-            item1: "Luan Pinto",
-            item2: "R$ 1200,00",
-            item3: "25/10/2022",
-            item4: null,
-        },
-        {
-            id: "9",
-            item1: "Eduardo",
-            item2: "R$ 1200,00",
-            item3: "25/10/2022",
-            item4: null,
-        },
-    ];
+    const [data, setData] = useState([]);
 
-    const Item = ({ item }) => (
-        <CardLine item1={item.item1} item2={item.item2} item3={item.item3} item4={item.item4} />
+    const renderItem = ({ item }) => (
+        <Item description={item.description} value={item.val} />
     );
 
-    const renderItem = ({ item }) => {
 
-        return (
-            <Item
-                item={item}
-                onPress={() => setSelectedId(item.id)}
-            />
-        );
-    };
+    const Item = ({ funcionario, valor, data }) => (
+        <CardLine item1={funcionario} item2={valor} item3={data} />
+    );
+
+    const getSale = () => {
+        firestore()
+            .collection('sale')
+            .get()
+            .then((querySnapshot) => {
+                let d = [];
+                querySnapshot.forEach((doc, index) => {
+                    //console.log(doc.description, " => ", doc.data());
+                    const sale = {
+                        id: index.toString(),
+                        funcionario: doc.data().funcionario,
+                        valor: doc.data().valor,
+                        data: doc.data().data
+                    };
+                    d.push(sale);
+                });
+                setData(d);
+            })
+            .catch((e) => {
+                console.log('Erro: ' + e);
+            });
+    }
+
+    useEffect(() => {
+        getSale();
+    }, []);
 
     return (
         <>
@@ -110,12 +69,11 @@ export default function ListSales() {
                     </View>
                     <View style={styles.line} />
                     <View style={styles.inLine}>
-                        <FlatList style={styles.list}
-                            showsVerticalScrollIndicator={false}
-                            data={DATA}
+                        <FlatList style={styles.list} 
+                        showsVerticalScrollIndicator={false}
+                            data={data}
                             renderItem={renderItem}
-                            keyExtractor={(item) => item.id}
-                            extraData={selectedId}
+                            keyExtractor={item => item.id}
                         />
                     </View>
                 </View>
@@ -175,7 +133,7 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
         color: colors("branco"),
     },
-    list:{
+    list: {
         height: '75%',
     }
 })

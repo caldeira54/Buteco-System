@@ -86,6 +86,8 @@ export default function Sale() {
                                     style={styles.icon}
                                 />
                                 <CurrencyInput
+                                    placeholder="R$ 0,00"
+                                    placeholderTextColor="#fff"
                                     style={{ color: "#FFF" }}
                                     value={valor}
                                     onChangeValue={setValor}
