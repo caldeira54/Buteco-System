@@ -9,6 +9,7 @@ import BtnCadastrar from './BtnCadastrar';
 export function ModalUser({ visible, onClose }) {
     const [user] = useState(auth().currentUser);
     const [name, setName] = useState('');
+    const [ready, setReady] = useState(false);
 
     async function handleUpdate() {
         await user.updateProfile({
@@ -23,14 +24,18 @@ export function ModalUser({ visible, onClose }) {
     }
 
     return (
-        <Modal visible={visible} animationType="slide" >
+        <Modal visible={!user.displayName ? visible : false} animationType="slide" >
             <View style={styles.container}>
                 <Text style={styles.title}>Atualização de Perfil</Text>
                 <View style={styles.input}>
                     <Text style={styles.subtitle}>Como deseja ser chamado?</Text>
                     <InputCadastro value={name} onChange={setName} />
                 </View>
-                <BtnCadastrar onPress={handleUpdate} title="Salvar" />
+                {!ready ? (
+                    <BtnCadastrar onPress={handleUpdate} title="Salvar" />
+                ) : (
+                    <BtnCadastrar onPress={onClose} title="Voltar" />
+                )}
             </View>
             <StatusBar backgroundColor={colors("pretosignin")} />
         </Modal>

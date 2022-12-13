@@ -24,6 +24,10 @@ export default function Home() {
         navigation.navigate("report");
     }
 
+    function handleClose() {
+        setIsModalVisible(false);
+    }
+
     useEffect(() => {
         if (!user.displayName)
             setIsModalVisible(true);
@@ -75,7 +79,7 @@ export default function Home() {
                 </View>
                 <ModalUser
                     visible={isModalVisible}
-                    onClose={() => setIsModalVisible(false)}
+                    onClose={handleClose}
                 />
             </View>
         </>
