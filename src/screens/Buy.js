@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import { View, StyleSheet, ScrollView, Keyboard, SafeAreaView, TouchableOpacity, Text, Alert } from 'react-native';
+import { View, StyleSheet, ScrollView, Keyboard, SafeAreaView, TouchableOpacity, Text, Alert, Image } from 'react-native';
 import firestore from '@react-native-firebase/firestore';
 import colors from '../global/colors';
 import Header from '../components/Header.js';
 import InputCadastro from '../components/InputCadastro.js';
 import Footer from '../components/Footer';
 import { maskDate } from '../utils/functions';
+import CurrencyInput from 'react-native-currency-input';
 
 export default function Buy() {
     const [funcionario, setFuncionario] = useState('');
@@ -56,11 +57,16 @@ export default function Buy() {
                 created_at: firestore.FieldValue.serverTimestamp()
             })
             .then(() => {
-                Alert.alert("Compras", "Compra cadastrada com sucesso!")
+                Alert.alert("Compras", "Compra cadastrada com sucesso!");
+                setFuncionario('');
+                setValor('');
+                setData('');
                 navigation.goBack();
             })
             .catch((error) => console.log(error));
     }
+
+
 
     return (
         <>
@@ -72,8 +78,27 @@ export default function Buy() {
                             <InputCadastro placeholder="Funcionário" icon='funcionario' value={funcionario} onChange={setFuncionario} />
                         </View>
 
-                        <View>
-                            <InputCadastro placeholder="Valor" icon='valor' value={valor} onChange={setValor} keyboardType="number-pad" />
+                        <View style={styles.inputArea}>
+                            <Image
+                                source={require('../assets/img/iconValor.png')}
+                                resizeMode="contain"
+                                style={styles.icon}
+                            />
+                            <CurrencyInput
+                                placeholder="R$0,00"
+                                placeholderTextColor="#fff"
+                                style={{ color: "#FFF" }}
+                                value={valor}
+                                onChangeValue={setValor}
+                                prefix="R$ "
+                                delimiter="."
+                                separator=","
+                                precision={2}
+                                minValue={0}
+                                onChangeText={(formattedValue) => {
+                                    console.log(formattedValue); // R$ 100,00
+                                }}
+                            />
                         </View>
 
                         <View>
@@ -118,5 +143,22 @@ const styles = StyleSheet.create({
         color: colors("branco"),
         textTransform: 'uppercase',
         textAlign: 'center'
-    }
+    },
+    icon: {
+        width: '10%',
+        height: '50%',
+        tintColor: colors("cinzaclaro"),
+    },
+    inputArea: {
+        flexDirection: 'row',
+        width: '100%',
+        height: 40,
+        borderBottomWidth: 1,
+        borderBottomColor: '#EEE',
+        padding: 4,
+        marginBottom: 20,
+        alignItems: 'center',
+        marginRight: 110,
+        paddingHorizontal: 20
+    },
 });

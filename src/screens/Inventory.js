@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { View, StyleSheet, SafeAreaView, ScrollView, Keyboard, TouchableOpacity, Text, Alert } from 'react-native';
+import { View, StyleSheet, SafeAreaView, ScrollView, Keyboard, TouchableOpacity, Text, Alert, Image } from 'react-native';
 import colors from '../global/colors';
 import Header from '../components/Header.js';
 import InputCadastro from '../components/InputCadastro.js';
 import Footer from '../components/Footer';
+import CurrencyInput from 'react-native-currency-input';
+import firestore from '@react-native-firebase/firestore';
 
 export default function Inventory() {
     const [fornecedor, setFornecedor] = useState('');
@@ -45,6 +47,26 @@ export default function Inventory() {
         };
     }, []);
 
+    function handleAdd() {
+        firestore()
+            .collection('inventory')
+            .add({
+                fornecedor,
+                produto,
+                preco,
+                quantidade,
+                created_at: firestore.FieldValue.serverTimestamp()
+            })
+            .then(() => {
+                Alert.alert("Estoque", "Estoque cadastrado com sucesso!");
+                setFornecedor('');
+                setProduto('');
+                setPreco('');
+                setQuantidade('');
+            })
+            .catch((error) => console.log(error));
+    }
+
     return (
         <>
             <SafeAreaView style={styles.container}>
@@ -59,8 +81,27 @@ export default function Inventory() {
                             <InputCadastro placeholder="Produto" icon='produto' value={produto} onChange={setProduto} />
                         </View>
 
-                        <View>
-                            <InputCadastro placeholder="Preço" icon='valor' value={preco} onChange={setPreco} keyboardType="number-pad" />
+                        <View style={styles.inputArea}>
+                            <Image
+                                source={require('../assets/img/iconValor.png')}
+                                resizeMode="contain"
+                                style={styles.icon}
+                            />
+                            <CurrencyInput
+                                placeholder="R$0,00"
+                                placeholderTextColor="#fff"
+                                style={{ color: "#FFF" }}
+                                value={preco}
+                                onChangeValue={setPreco}
+                                prefix="R$ "
+                                delimiter="."
+                                separator=","
+                                precision={2}
+                                minValue={0}
+                                onChangeText={(formattedValue) => {
+                                    console.log(formattedValue); // R$ 100,00
+                                }}
+                            />
                         </View>
                         <View>
                             <InputCadastro placeholder="Quantidade" icon='quantidade' value={quantidade} onChange={setQuantidade} keyboardType="number-pad" />
@@ -104,5 +145,22 @@ const styles = StyleSheet.create({
         color: colors("branco"),
         textTransform: 'uppercase',
         textAlign: 'center'
-    }
+    },
+    icon: {
+        width: '10%',
+        height: '50%',
+        tintColor: colors("cinzaclaro"),
+    },
+    inputArea: {
+        flexDirection: 'row',
+        width: '100%',
+        height: 40,
+        borderBottomWidth: 1,
+        borderBottomColor: '#EEE',
+        padding: 4,
+        marginBottom: 20,
+        alignItems: 'center',
+        marginRight: 110,
+        paddingHorizontal: 20
+    },
 });

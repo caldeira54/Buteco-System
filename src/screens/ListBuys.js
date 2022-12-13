@@ -1,94 +1,51 @@
 import { View, StyleSheet, SafeAreaView, Text, FlatList } from 'react-native';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import colors from '../global/colors';
 import Footer from '../components/Footer';
 import BtnEditar from '../components/BtnEditar';
 import BtnExcluir from '../components/BtnExcluir';
 import Header from '../components/Header';
 import CardLine from '../components/CardLine';
+import firestore from '@react-native-firebase/firestore';
 
 export default function ListBuys() {
     const [selectedId, setSelectedId] = useState(null);
 
-    const DATA = [
-        {
-            id: "1",          
-            item1: "R$ 12000,00",
-            item2: "25/10/2022",
-            item3: null,
-            item4: null,
-        },
-        {
-            id: "2",
-            item1: "R$ 12000,00",
-            item2: "25/10/2022",
-            item3: null,
-            item4: null,
-        },
-        {
-            id: "3",         
-            item1: "R$ 12000,00",
-            item2: "25/10/2022",
-            item3: null,
-            item4: null,
-        },
-        {
-            id: "4",
-            item1: "R$ 12000,00",
-            item2: "25/10/2022",
-            item3: null,
-            item4: null,
-        },
-        {
-            id: "5",
-            item1: "R$ 12000,00",
-            item2: "25/10/2022",
-            item3: null,
-            item4: null,
-        },
-        {
-            id: "6",
-            item1: "R$ 12000,00",
-            item2: "25/10/2022",
-            item3: null,
-            item4: null,
-        },
-        {
-            id: "7",
-            item1: "R$ 12000,00",
-            item2: "25/10/2022",
-            item3: null,
-            item4: null,
-        },
-        {
-            id: "8",
-            item1: "R$ 12000,00",
-            item2: "25/10/2022",
-            item3: null,
-            item4: null,
-        },
-        {
-            id: "9",
-            item1: "R$ 12000,00",
-            item2: "25/10/2022",
-            item3: null,
-            item4: null,
-        },
-    ];
+    
 
-    const Item = ({ item }) => (
-        <CardLine item1={item.item1} item2={item.item2} item3={item.item3} item4={item.item4} />
+    const Item = ({ valor, data }) => (
+        <CardLine item1={valor} item2={data} />
     );
 
     const renderItem = ({ item }) => {
-
-        return (
-            <Item
-                item={item}
-                onPress={() => setSelectedId(item.id)}
-            />
-        );
+        <Item valor={item.valor} data={item.data}/>
     };
+
+    const getBuy = () => {
+        firestore()
+        .collection('buy')
+        .get()
+        .then((querySnapshot) => {
+            let d = [];
+            querySnapshot.forEach((doc, index) => {
+                //console.log(doc.description, " => ", doc.data());
+                const buy = {
+                    id: index.toString(),
+                    valor: doc.data().valor,
+                    data: doc.data().data
+                };
+                d.push(buy);
+            });
+            setData(d);
+        })
+        .catch((e) => {
+            console.log('Erro: ' + e);
+        });
+    }
+
+    useEffect(() => {
+        getBuy();
+    }, []);
 
     return (
         <>
@@ -109,7 +66,7 @@ export default function ListBuys() {
                     <View style={styles.inLine}>
                         <FlatList style={styles.list}
                             showsVerticalScrollIndicator={false}
-                            data={DATA}
+                            // data={DATA}
                             renderItem={renderItem}
                             keyExtractor={(item) => item.id}
                             extraData={selectedId}
