@@ -2,93 +2,12 @@ import { View, StyleSheet, SafeAreaView, Text, FlatList } from 'react-native';
 import React, { useState } from 'react';
 import colors from '../global/colors';
 import Footer from '../components/Footer';
-import BtnEditar from '../components/BtnEditar';
 import BtnExcluir from '../components/BtnExcluir';
 import Header from '../components/Header';
 import CardLine from '../components/CardLine';
 
 export default function ListInventorys() {
     const [selectedId, setSelectedId] = useState(null);
-
-    const DATA = [
-        {
-            id: "1",
-            item1: "Guaraniaaaaaa",
-            item2: "Coca-Cola",
-            item3: "R$ 1200aaaaaa,00",
-            item4: "10",
-        },
-        {
-            id: "2",
-            item1: "Guarani",
-            item2: "Coca-Cola",
-            item3: "R$ 1200,00",
-            item4: "10",
-        },
-        {
-            id: "3",
-            item1: "Guarani",
-            item2: "Coca-Cola",
-            item3: "R$ 1200,00",
-            item4: "10",
-        },
-        {
-            id: "4",
-            item1: "Guarani",
-            item2: "Coca-Cola",
-            item3: "R$ 1200,00",
-            item4: "10",
-        },
-        {
-            id: "5",
-            item1: "Guarani",
-            item2: "Coca-Cola",
-            item3: "R$ 1200,00",
-            item4: "10",
-        },
-        {
-            id: "6",
-            item1: "Guarani",
-            item2: "Coca-Cola",
-            item3: "R$ 1200,00",
-            item4: "10",
-        },
-        {
-            id: "7",
-            item1: "Guarani",
-            item2: "Coca-Cola",
-            item3: "R$ 1200,00",
-            item4: "10",
-        },
-        {
-            id: "8",
-            item1: "Guarani",
-            item2: "Coca-Cola",
-            item3: "R$ 1200,00",
-            item4: "10",
-        },
-        {
-            id: "9",
-            item1: "Guarani",
-            item2: "Coca-Cola",
-            item3: "R$ 1200,00",
-            item4: "12",
-        },
-    ];
-
-    const Item = ({ item }) => (
-        <CardLine item1={item.item1} item2={item.item2} item3={item.item3} item4={item.item4} />
-    );
-
-    const renderItem = ({ item }) => {
-
-        return (
-            <Item
-                item={item}
-                onPress={() => setSelectedId(item.id)}
-            />
-        );
-    };
 
     return (
         <>
@@ -114,17 +33,15 @@ export default function ListInventorys() {
                     </View>
                     <View style={styles.line} />
                     <View style={styles.inLine}>
-                        <FlatList style={styles.list}
-                            showsVerticalScrollIndicator={false}
-                            data={DATA}
+                    <FlatList style={styles.list} 
+                        showsVerticalScrollIndicator={false}
+                            data={data}
                             renderItem={renderItem}
-                            keyExtractor={(item) => item.id}
-                            extraData={selectedId}
+                            keyExtractor={item => item.id}
                         />
                     </View>
                 </View>
                 <View style={styles.position}>
-                    <BtnEditar />
                     <BtnExcluir />
                 </View>
             </SafeAreaView>
@@ -158,7 +75,6 @@ const styles = StyleSheet.create({
     inLine: {
         flexDirection: 'row',
         width: '100%',
-        //justifyContent: 'space-evenly',
     },
     line: {
         width: '100%',

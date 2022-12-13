@@ -2,7 +2,6 @@ import { View, StyleSheet, SafeAreaView, Text, FlatList } from 'react-native';
 import React, { useState, useEffect } from 'react';
 import colors from '../global/colors';
 import Footer from '../components/Footer';
-import BtnEditar from '../components/BtnEditar';
 import BtnExcluir from '../components/BtnExcluir';
 import Header from '../components/Header';
 import CardLine from '../components/CardLine';
@@ -28,7 +27,6 @@ export default function ListSales() {
             .then((querySnapshot) => {
                 let d = [];
                 querySnapshot.forEach((doc, index) => {
-                    //console.log(doc.description, " => ", doc.data());
                     const sale = {
                         id: index.toString(),
                         funcionario: doc.data().funcionario,
@@ -77,7 +75,6 @@ export default function ListSales() {
                     </View>
                 </View>
                 <View style={styles.position}>
-                    <BtnEditar />
                     <BtnExcluir />
                 </View>
             </SafeAreaView>

@@ -2,7 +2,6 @@ import { View, StyleSheet, SafeAreaView, Text, FlatList } from 'react-native';
 import React, { useState, useEffect } from 'react';
 import colors from '../global/colors';
 import Footer from '../components/Footer';
-import BtnEditar from '../components/BtnEditar';
 import BtnExcluir from '../components/BtnExcluir';
 import Header from '../components/Header';
 import CardLine from '../components/CardLine';
@@ -10,8 +9,6 @@ import firestore from '@react-native-firebase/firestore';
 
 export default function ListBuys() {
     const [selectedId, setSelectedId] = useState(null);
-
-    
 
     const Item = ({ valor, data }) => (
         <CardLine item1={valor} item2={data} />
@@ -64,17 +61,15 @@ export default function ListBuys() {
                     </View>
                     <View style={styles.line} />
                     <View style={styles.inLine}>
-                        <FlatList style={styles.list}
-                            showsVerticalScrollIndicator={false}
-                            // data={DATA}
+                    <FlatList style={styles.list} 
+                        showsVerticalScrollIndicator={false}
+                            data={data}
                             renderItem={renderItem}
-                            keyExtractor={(item) => item.id}
-                            extraData={selectedId}
+                            keyExtractor={item => item.id}
                         />
                     </View>
                 </View>
                 <View style={styles.position}>
-                    <BtnEditar />
                     <BtnExcluir />
                 </View>
             </SafeAreaView>
