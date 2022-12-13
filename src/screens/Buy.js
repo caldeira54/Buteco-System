@@ -1,17 +1,30 @@
 import React, { useState, useEffect } from 'react';
-import { View, StyleSheet, ScrollView, Keyboard, SafeAreaView } from 'react-native';
+import { View, StyleSheet, ScrollView, Keyboard, SafeAreaView, TouchableOpacity, Text, Alert } from 'react-native';
+import firestore from '@react-native-firebase/firestore';
 import colors from '../global/colors';
 import Header from '../components/Header.js';
 import InputCadastro from '../components/InputCadastro.js';
 import Footer from '../components/Footer';
-import BtnCadastrar from '../components/BtnCadastrar.js';
-import {maskDate} from '../utils/functions';
+import { maskDate } from '../utils/functions';
 
 export default function Buy() {
     const [funcionario, setFuncionario] = useState('');
     const [valor, setValor] = useState('');
     const [data, setData] = useState('');
     const [keyboardVisible, setKeyboardVisible] = useState(false);
+    const [valid, setValid] = useState(false);
+
+    useEffect(() => {
+        if (funcionario && valor && data) {
+            setValid(true);
+        } else {
+            setValid(false);
+        }
+    }, [funcionario, valor, data])
+
+    function invalid() {
+        return Alert.alert('Erro', 'Preencha todos os campos.');
+    }
 
     useEffect(() => {
         const keyboardDidShowListener = Keyboard.addListener(
@@ -33,6 +46,22 @@ export default function Buy() {
         };
     }, []);
 
+    function handleAdd() {
+        firestore()
+            .collection('buy')
+            .add({
+                funcionario,
+                valor,
+                data,
+                created_at: firestore.FieldValue.serverTimestamp()
+            })
+            .then(() => {
+                Alert.alert("Compras", "Compra cadastrada com sucesso!")
+                navigation.goBack();
+            })
+            .catch((error) => console.log(error));
+    }
+
     return (
         <>
             <SafeAreaView style={styles.container}>
@@ -44,14 +73,18 @@ export default function Buy() {
                         </View>
 
                         <View>
-                            <InputCadastro placeholder="Valor" icon='valor' value={valor} onChange={setValor} keyboardType="number-pad"/>
+                            <InputCadastro placeholder="Valor" icon='valor' value={valor} onChange={setValor} keyboardType="number-pad" />
                         </View>
 
                         <View>
-                            <InputCadastro placeholder="Data" icon='data' value={data} onChange={text => setData(maskDate(text))} keyboardType="number-pad"/>
+                            <InputCadastro placeholder="Data" icon='data' value={data} onChange={text => setData(maskDate(text))} keyboardType="number-pad" />
                         </View>
                     </View>
-                    <BtnCadastrar />
+                    <View>
+                        <TouchableOpacity style={styles.button} onPress={valid ? handleAdd : invalid}>
+                            <Text style={styles.textButton}>Cadastrar</Text>
+                        </TouchableOpacity>
+                    </View>
                 </ScrollView>
                 {!keyboardVisible && (
                     <Footer />
@@ -72,4 +105,18 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         marginTop: 50,
     },
+    button: {
+        backgroundColor: colors("verdeclaro"),
+        width: 200,
+        height: 50,
+        borderRadius: 12,
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+    textButton: {
+        fontSize: 20,
+        color: colors("branco"),
+        textTransform: 'uppercase',
+        textAlign: 'center'
+    }
 });
