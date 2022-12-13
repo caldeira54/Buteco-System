@@ -2,7 +2,6 @@ import { View, StyleSheet, SafeAreaView, Text, FlatList } from 'react-native';
 import React, { useState } from 'react';
 import colors from '../global/colors';
 import Footer from '../components/Footer';
-import BtnEditar from '../components/BtnEditar';
 import BtnExcluir from '../components/BtnExcluir';
 import Header from '../components/Header';
 import CardLine from '../components/CardLine';
@@ -10,86 +9,41 @@ import CardLine from '../components/CardLine';
 export default function ListProducts() {
     const [selectedId, setSelectedId] = useState(null);
 
-    const DATA = [
-        {
-            id: "1",
-            item1: "33.041.260/0652-90",
-            item2: "Guarani",
-            item3: "São João Evangelista",
-            item4: null,
-        },
-        {
-            id: "2",
-            item1: "33.041.260/0652-90",
-            item2: "Guarani",
-            item3: "São João Evangelista",
-            item4: null,
-        },
-        {
-            id: "3",
-            item1: "33.041.260/0652-90",
-            item2: "Guarani",
-            item3: "São João Evangelista",
-            item4: null,
-        },
-        {
-            id: "4",
-            item1: "33.041.260/0652-90",
-            item2: "Guarani",
-            item3: "São João Evangelista",
-            item4: null,
-        },
-        {
-            id: "5",
-            item1: "33.041.260/0652-90",
-            item2: "Guarani",
-            item3: "São João Evangelista",
-            item4: null,
-        },
-        {
-            id: "6",
-            item1: "33.041.260/0652-90",
-            item2: "Guarani",
-            item3: "São João Evangelista",
-            item4: null,
-        },
-        {
-            id: "7",
-            item1: "33.041.260/0652-90",
-            item2: "Guarani",
-            item3: "São João Evangelista",
-            item4: null,
-        },
-        {
-            id: "8",
-            item1: "33.041.260/0652-90",
-            item2: "Guarani",
-            item3: "São João Evangelista",
-            item4: null,
-        },
-        {
-            id: "9",
-            item1: "33.041.260/0652-90",
-            item2: "Guarani",
-            item3: "São João Evangelista",
-            item4: null,
-        },
-    ];
+    const [data, setData] = useState([]);
 
-    const Item = ({ item }) => (
-        <CardLine item1={item.item1} item2={item.item2} item3={item.item3} item4={item.item4} />
+    const renderItem = ({ item }) => (
+        <Item funcionario={item.funcionario} valor={item.valor} data={item.data} />
     );
 
-    const renderItem = ({ item }) => {
+    const Item = ({ funcionario, valor, data }) => (
+        <CardLine item1={funcionario} item2={valor} item3={data} />
+    );
 
-        return (
-            <Item
-                item={item}
-                onPress={() => setSelectedId(item.id)}
-            />
-        );
-    };
+    const getSale = () => {
+        firestore()
+            .collection('provider')
+            .get()
+            .then((querySnapshot) => {
+                let d = [];
+                querySnapshot.forEach((doc, index) => {
+                    const provider = {
+                        id: index.toString(),
+                        funcionario: doc.data().funcionario,
+                        valor: doc.data().valor,
+                        data: doc.data().data
+                    };
+                    d.push(provider);
+                });
+                setData(d);
+            })
+            .catch((e) => {
+                console.log('Erro: ' + e);
+            });
+    }
 
+    useEffect(() => {
+        getSale();
+    }, []);
     return (
         <>
             <SafeAreaView style={styles.container}>
@@ -110,17 +64,15 @@ export default function ListProducts() {
                     </View>
                     <View style={styles.line} />
                     <View style={styles.inLine}>
-                        <FlatList style={styles.list}
-                            showsVerticalScrollIndicator={false}
-                            data={DATA}
+                    <FlatList style={styles.list} 
+                        showsVerticalScrollIndicator={false}
+                            data={data}
                             renderItem={renderItem}
-                            keyExtractor={(item) => item.id}
-                            extraData={selectedId}
+                            keyExtractor={item => item.id}
                         />
                     </View>
                 </View>
                 <View style={styles.position}>
-                    <BtnEditar />
                     <BtnExcluir />
                 </View>
             </SafeAreaView>
