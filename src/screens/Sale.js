@@ -74,11 +74,10 @@ export default function Sale() {
                 <ScrollView contentContainerStyle={{ flex: 1, alignItems: 'center' }}>
                     <View style={styles.form}>
                         <View>
-                            <InputCadastro placeholder="Funcionário" icon='funcionario' value={funcionario} onChange={setFuncionario} />
+                            <InputCadastro placeholder="Funcionário" icon='funcionario' value={user.displayName} disabled />
                         </View>
 
                         <View>
-                            {/* <InputCadastro placeholder="Valor" icon='valor' value={valor} onChange={value => setValor(formatMoney(value))} keyboardType="number-pad" /> */}
                             <View style={styles.inputArea}>
                                 <Image
                                     source={require('../assets/img/iconValor.png')}
@@ -86,6 +85,8 @@ export default function Sale() {
                                     style={styles.icon}
                                 />
                                 <CurrencyInput
+                                    placeholder="R$ 0,00"
+                                    placeholderTextColor="#fff"
                                     style={{ color: "#FFF" }}
                                     value={valor}
                                     onChangeValue={setValor}

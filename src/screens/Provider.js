@@ -4,6 +4,7 @@ import colors from '../global/colors';
 import Header from '../components/Header.js';
 import InputCadastro from '../components/InputCadastro.js';
 import Footer from '../components/Footer';
+import firestore from '@react-native-firebase/firestore';
 import { cnpjMask } from '../utils/functions';
 
 export default function Provider() {
@@ -23,6 +24,24 @@ export default function Provider() {
 
     function invalid() {
         return Alert.alert('Erro', 'Preencha todos os campos.');
+    }
+
+    function handleAdd() {
+        firestore()
+            .collection('provider')
+            .add({
+                cnpj,
+                nome,
+                endereco,
+                created_at: firestore.FieldValue.serverTimestamp()
+            })
+            .then(() => {
+                Alert.alert("Fornecedor", "Fornecedor cadastrado com sucesso!");
+                setCnpj('');
+                setNome('');
+                setEndereco('');
+            })
+            .catch((error) => console.log(error));
     }
 
     useEffect(() => {
