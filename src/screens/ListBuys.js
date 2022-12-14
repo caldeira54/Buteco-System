@@ -9,14 +9,15 @@ import firestore from '@react-native-firebase/firestore';
 
 export default function ListBuys() {
     const [selectedId, setSelectedId] = useState(null);
+    const [data, setData] = useState([]);
+
+    const renderItem = ({ item }) => (
+        <Item valor={item.valor} data={item.data} />
+    );
 
     const Item = ({ valor, data }) => (
         <CardLine item1={valor} item2={data} />
     );
-
-    const renderItem = ({ item }) => {
-        <Item valor={item.valor} data={item.data}/>
-    };
 
     const getBuy = () => {
         firestore()
@@ -110,7 +111,7 @@ const styles = StyleSheet.create({
     },
     column1: {
         width: '47%',
-        marginLeft: 60,
+        marginLeft: 80,
     },
     column2: {
         width: '47%',

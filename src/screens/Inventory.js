@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { View, StyleSheet, SafeAreaView, ScrollView, Keyboard, TouchableOpacity, Text, Alert, Image } from 'react-native';
+import { Picker } from '@react-native-picker/picker';
 import colors from '../global/colors';
 import Header from '../components/Header.js';
 import InputCadastro from '../components/InputCadastro.js';
@@ -8,6 +9,7 @@ import CurrencyInput from 'react-native-currency-input';
 import firestore from '@react-native-firebase/firestore';
 
 export default function Inventory() {
+    const [nome, setNome] = useState([]);
     const [fornecedor, setFornecedor] = useState('');
     const [produto, setProduto] = useState('');
     const [preco, setPreco] = useState('');
@@ -59,13 +61,34 @@ export default function Inventory() {
             })
             .then(() => {
                 Alert.alert("Estoque", "Estoque cadastrado com sucesso!");
-                setFornecedor('');
                 setProduto('');
                 setPreco('');
                 setQuantidade('');
             })
             .catch((error) => console.log(error));
+        getFind();
     }
+
+    const getFind = () => {
+        firestore()
+            .collection('provider')
+            .get()
+            .then((querySnapshot) => {
+                let d = [];
+                querySnapshot.forEach((doc, index) => {
+                    const provider = {
+                        id: index.toString(),
+                        fornecedor: doc.data().nome,
+                    };
+                    d.push(provider);
+                });
+                setNome(d);
+            })
+    }
+
+    useEffect(() => {
+        getFind();
+    }, [])
 
     return (
         <>
@@ -73,8 +96,19 @@ export default function Inventory() {
                 <Header style={styles.container} title='CADASTRO DE ESTOQUE' />
                 <ScrollView contentContainerStyle={{ flex: 1, alignItems: 'center' }}>
                     <View style={styles.form}>
+
                         <View>
-                            <InputCadastro placeholder="Fornecedor" icon='cnpj' value={fornecedor} onChange={setFornecedor} />
+                            <Text style={styles.input}>Fornecedor</Text>
+                            <Picker style={styles.picker}
+                                selectedValue={fornecedor}
+                                onValueChange={(value) =>
+                                    setFornecedor(value)
+                                }>
+                                {nome.map((v, i) => {
+                                    return <Picker.Item label={v.fornecedor} value={v.fornecedor} key={i} />
+                                }
+                                )}
+                            </Picker>
                         </View>
 
                         <View>
@@ -151,6 +185,12 @@ const styles = StyleSheet.create({
         height: '50%',
         tintColor: colors("cinzaclaro"),
     },
+    input: {
+        width: '80%',
+        fontSize: 17,
+        color: colors("branco"),
+        textAlign: 'center',
+    },
     inputArea: {
         flexDirection: 'row',
         width: '100%',
@@ -163,4 +203,8 @@ const styles = StyleSheet.create({
         marginRight: 110,
         paddingHorizontal: 20
     },
+    picker: {
+        color: colors("branco"),
+    }
+
 });

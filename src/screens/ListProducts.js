@@ -1,13 +1,49 @@
 import { View, StyleSheet, SafeAreaView, Text, FlatList } from 'react-native';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import colors from '../global/colors';
 import Footer from '../components/Footer';
 import BtnExcluir from '../components/BtnExcluir';
 import Header from '../components/Header';
 import CardLine from '../components/CardLine';
+import firestore from '@react-native-firebase/firestore';
 
 export default function ListProducts() {
     const [selectedId, setSelectedId] = useState(null);
+    const [data, setData] = useState([]);
+
+    const renderItem = ({ item }) => (
+        <Item produto={item.produto} preco={item.preco} />
+    );
+
+    const Item = ({ produto, preco }) => (
+        <CardLine item1={produto} item2={preco} />
+    );
+
+    const getProduct = () => {
+        firestore()
+        .collection('product')
+        .get()
+        .then((querySnapshot) => {
+            let d = [];
+            querySnapshot.forEach((doc, index) => {
+                //console.log(doc.description, " => ", doc.data());
+                const product = {
+                    id: index.toString(),
+                    produto: doc.data().produto,
+                    preco: doc.data().preco
+                };
+                d.push(product);
+            });
+            setData(d);
+        })
+        .catch((e) => {
+            console.log('Erro: ' + e);
+        });
+    }
+
+    useEffect(() => {
+        getProduct();
+    }, []);
 
 
     return (

@@ -20,6 +20,7 @@ export default function Sale() {
     useEffect(() => {
         if (valor && data) {
             setValid(true);
+            setFuncionario(user.displayName);
         } else {
             setValid(false);
         }
@@ -41,7 +42,6 @@ export default function Sale() {
             .then(() => {
                 Alert.alert("Vendas", "Venda cadastrada com sucesso!");
                 setData('');
-                setFuncionario('');
                 setValor('');
             })
             .catch((error) => console.log(error));

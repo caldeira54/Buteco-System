@@ -9,7 +9,6 @@ import firestore from '@react-native-firebase/firestore';
 
 export default function ListSales() {
     const [selectedId, setSelectedId] = useState(null);
-
     const [data, setData] = useState([]);
 
     const renderItem = ({ item }) => (

@@ -1,13 +1,50 @@
 import { View, StyleSheet, SafeAreaView, Text, FlatList } from 'react-native';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import colors from '../global/colors';
 import Footer from '../components/Footer';
 import BtnExcluir from '../components/BtnExcluir';
 import Header from '../components/Header';
 import CardLine from '../components/CardLine';
+import firestore from '@react-native-firebase/firestore';
 
 export default function ListProducts() {
     const [selectedId, setSelectedId] = useState(null);
+    const [data, setData] = useState([]);
+
+    const renderItem = ({ item }) => (
+        <Item fornecedor={item.fornecedor} valor={item.valor} datacompra={item.datacompra} datapgto={item.datapgto} />
+    );
+
+    const Item = ({ fornecedor, valor, datacompra, datapgto }) => (
+        <CardLine item1={fornecedor} item2={valor} item3={datacompra} item4={datapgto}/>
+    );
+
+    const getNotes = () => {
+        firestore()
+            .collection('promissoryNotes')
+            .get()
+            .then((querySnapshot) => {
+                let d = [];
+                querySnapshot.forEach((doc, index) => {
+                    const promissoryNotes = {
+                        id: index.toString(),
+                        fornecedor: doc.data().fornecedor,
+                        valor: doc.data().valor,
+                        datacompra: doc.data().datacompra,
+                        datapgto: doc.data().datapgto
+                    };
+                    d.push(promissoryNotes);
+                });
+                setData(d);
+            })
+            .catch((e) => {
+                console.log('Erro: ' + e);
+            });
+    }
+
+    useEffect(() => {
+        getNotes();
+    }, []);
 
 
     return (

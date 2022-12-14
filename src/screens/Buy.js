@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { View, StyleSheet, ScrollView, Keyboard, SafeAreaView, TouchableOpacity, Text, Alert, Image } from 'react-native';
 import firestore from '@react-native-firebase/firestore';
+import auth from '@react-native-firebase/auth';
 import colors from '../global/colors';
 import Header from '../components/Header.js';
 import InputCadastro from '../components/InputCadastro.js';
@@ -9,6 +10,7 @@ import { maskDate } from '../utils/functions';
 import CurrencyInput from 'react-native-currency-input';
 
 export default function Buy() {
+    const [user] = useState(auth().currentUser);
     const [funcionario, setFuncionario] = useState('');
     const [valor, setValor] = useState('');
     const [data, setData] = useState('');
@@ -16,12 +18,13 @@ export default function Buy() {
     const [valid, setValid] = useState(false);
 
     useEffect(() => {
-        if (funcionario && valor && data) {
+        if (valor && data) {
             setValid(true);
+            setFuncionario(user.displayName);
         } else {
             setValid(false);
         }
-    }, [funcionario, valor, data])
+    }, [valor, data])
 
     function invalid() {
         return Alert.alert('Erro', 'Preencha todos os campos.');
@@ -58,10 +61,8 @@ export default function Buy() {
             })
             .then(() => {
                 Alert.alert("Compras", "Compra cadastrada com sucesso!");
-                setFuncionario('');
                 setValor('');
                 setData('');
-                navigation.goBack();
             })
             .catch((error) => console.log(error));
     }
@@ -75,7 +76,7 @@ export default function Buy() {
                 <ScrollView contentContainerStyle={{ flex: 1, alignItems: 'center' }}>
                     <View style={styles.form}>
                         <View>
-                            <InputCadastro placeholder="Funcionário" icon='funcionario' value={funcionario} onChange={setFuncionario} />
+                            <InputCadastro placeholder="Funcionário" icon='funcionario' value={user.displayName} disabled />
                         </View>
 
                         <View style={styles.inputArea}>

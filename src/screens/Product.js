@@ -4,10 +4,12 @@ import colors from '../global/colors';
 import Header from '../components/Header.js';
 import InputCadastro from '../components/InputCadastro.js';
 import firestore from '@react-native-firebase/firestore';
+import auth from '@react-native-firebase/auth';
 import Footer from '../components/Footer';
 import CurrencyInput from 'react-native-currency-input';
 
 export default function Product() {
+    const [user] = useState(auth().currentUser);
     const [funcionario, setFuncionario] = useState('');
     const [produto, setProduto] = useState('');
     const [preco, setPreco] = useState('');
@@ -15,12 +17,13 @@ export default function Product() {
     const [valid, setValid] = useState(false);
 
     useEffect(() => {
-        if (funcionario && produto && preco) {
+        if (produto && preco) {
             setValid(true);
+            setFuncionario(user.displayName);
         } else {
             setValid(false);
         }
-    }, [funcionario, produto, preco])
+    }, [produto, preco])
 
     function invalid() {
         return Alert.alert('Erro', 'Preencha todos os campos.');
@@ -37,7 +40,6 @@ export default function Product() {
             })
             .then(() => {
                 Alert.alert("Produto", "Produto cadastrado com sucesso!");
-                setFuncionario('');
                 setProduto('');
                 setPreco('');
             })
@@ -71,7 +73,7 @@ export default function Product() {
                 <ScrollView contentContainerStyle={{ flex: 1, alignItems: 'center' }}>
                     <View style={styles.form}>
                         <View>
-                            <InputCadastro placeholder="Funcionário" icon='funcionario' value={funcionario} onChange={setFuncionario} />
+                            <InputCadastro placeholder="Funcionário" icon='funcionario' value={user.displayName} disabled />
                         </View>
 
                         <View>
@@ -86,7 +88,7 @@ export default function Product() {
                             />
                             <CurrencyInput
                                 placeholder="R$ 0,00"
-                                placeholderTextColor="#fff" 
+                                placeholderTextColor="#fff"
                                 style={{ color: "#FFF" }}
                                 value={preco}
                                 onChangeValue={setPreco}

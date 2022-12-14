@@ -1,25 +1,25 @@
 import { View, StyleSheet, SafeAreaView, Text, FlatList } from 'react-native';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import colors from '../global/colors';
 import Footer from '../components/Footer';
 import BtnExcluir from '../components/BtnExcluir';
 import Header from '../components/Header';
 import CardLine from '../components/CardLine';
+import firestore from '@react-native-firebase/firestore';
 
 export default function ListProducts() {
     const [selectedId, setSelectedId] = useState(null);
-
     const [data, setData] = useState([]);
 
     const renderItem = ({ item }) => (
-        <Item funcionario={item.funcionario} valor={item.valor} data={item.data} />
+        <Item cnpj={item.cnpj} nome={item.nome} endereco={item.endereco} />
     );
 
-    const Item = ({ funcionario, valor, data }) => (
-        <CardLine item1={funcionario} item2={valor} item3={data} />
+    const Item = ({ cnpj, nome, endereco }) => (
+        <CardLine item1={cnpj} item2={nome} item3={endereco} />
     );
 
-    const getSale = () => {
+    const getProvider = () => {
         firestore()
             .collection('provider')
             .get()
@@ -28,9 +28,9 @@ export default function ListProducts() {
                 querySnapshot.forEach((doc, index) => {
                     const provider = {
                         id: index.toString(),
-                        funcionario: doc.data().funcionario,
-                        valor: doc.data().valor,
-                        data: doc.data().data
+                        cnpj: doc.data().cnpj,
+                        nome: doc.data().nome,
+                        endereco: doc.data().endereco
                     };
                     d.push(provider);
                 });
@@ -42,8 +42,9 @@ export default function ListProducts() {
     }
 
     useEffect(() => {
-        getSale();
+        getProvider();
     }, []);
+    
     return (
         <>
             <SafeAreaView style={styles.container}>

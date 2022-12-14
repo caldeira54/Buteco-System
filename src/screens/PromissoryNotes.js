@@ -7,8 +7,10 @@ import Footer from '../components/Footer';
 import firestore from '@react-native-firebase/firestore';
 import { maskDate } from '../utils/functions';
 import CurrencyInput from 'react-native-currency-input';
+import { Picker } from '@react-native-picker/picker';
 
 export default function PromissoryNotes() {
+    const [nome, setNome] = useState([]);
     const [fornecedor, setFornecedor] = useState('');
     const [valor, setValor] = useState('');
     const [dataCompra, setDataCompra] = useState('');
@@ -40,13 +42,34 @@ export default function PromissoryNotes() {
             })
             .then(() => {
                 Alert.alert("Nota", "Nota cadastrada com sucesso!");
-                setFornecedor('');
                 setValor('');
                 setDataCompra('');
                 setDataPgto('');
             })
             .catch((error) => console.log(error));
+        getFind();
     }
+
+    const getFind = () => {
+        firestore()
+            .collection('provider')
+            .get()
+            .then((querySnapshot) => {
+                let d = [];
+                querySnapshot.forEach((doc, index) => {
+                    const provider = {
+                        id: index.toString(),
+                        fornecedor: doc.data().nome,
+                    };
+                    d.push(provider);
+                });
+                setNome(d);
+            })
+    }
+
+    useEffect(() => {
+        getFind();
+    }, [])
 
     useEffect(() => {
         const keyboardDidShowListener = Keyboard.addListener(
@@ -66,7 +89,7 @@ export default function PromissoryNotes() {
             keyboardDidHideListener.remove();
             keyboardDidShowListener.remove();
         };
-    }, []);
+    }, [])
 
     return (
         <>
@@ -74,8 +97,19 @@ export default function PromissoryNotes() {
                 <Header style={styles.container} title='CADASTRO DE NOTA PROMISSÓRIA' />
                 <ScrollView contentContainerStyle={{ flex: 1, alignItems: 'center' }}>
                     <View style={styles.form}>
-                        <View>
-                            <InputCadastro placeholder="Fornecedor" icon='cnpj' value={fornecedor} onChange={setFornecedor} />
+
+                    <View>
+                            <Text style={styles.input}>Fornecedor</Text>
+                            <Picker style={styles.picker}
+                                selectedValue={fornecedor}
+                                onValueChange={(value) =>
+                                    setFornecedor(value)
+                                }>
+                                {nome.map((v, i) => {
+                                    return <Picker.Item label={v.fornecedor} value={v.fornecedor} key={i} />
+                                }
+                                )}
+                            </Picker>
                         </View>
 
                         <View style={styles.inputArea}>
@@ -86,7 +120,7 @@ export default function PromissoryNotes() {
                             />
                             <CurrencyInput
                                 placeholder="R$ 0,00"
-                                placeholderTextColor="#fff" 
+                                placeholderTextColor="#fff"
                                 style={{ color: "#FFF" }}
                                 value={valor}
                                 onChangeValue={setValor}
@@ -176,5 +210,14 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         marginRight: 110,
         paddingHorizontal: 20
+    },
+    picker: {
+        color: colors("branco"),
+    },
+    input: {
+        width: '80%',
+        fontSize: 17,
+        color: colors("branco"),
+        textAlign: 'center',
     },
 });
