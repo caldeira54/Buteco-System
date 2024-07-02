@@ -10,7 +10,7 @@
   },
   "dependencies": {
     "@expo/metro-config": "^0.18.8",
-    "@grpc/grpc-js": "^1.10.10",
+    "@grpc/grpc-js": "^1.8.22",
     "@react-native-firebase/app": "^20.1.0",
     "@react-native-firebase/auth": "^20.1.0",
     "@react-native-firebase/firestore": "^20.1.0",
